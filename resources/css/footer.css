@@ -1,0 +1,64 @@
+.dk-footer {
+    padding: 20px 0 0;
+    background-color: #151414;
+    position: relative;
+    z-index: 2;
+    border-top: 0.25px solid #C0C0BC; /* thin white border */
+    margin-top: 1.5rem; /* spacing above footer */
+}
+.dk-footer .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.dk-footer-box-info {
+    margin-right: 10px;
+}
+
+.dk-footer-box-info ul {
+    display: flex;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.dk-footer-box-info ul li a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: transparent;
+    color: #ffffff;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.dk-footer-box-info ul li a:hover {
+    background: #fff;
+    color: #111;
+}
+
+/* Subscribe input + button inline */
+.dk-footer-form input {
+    flex: 1;
+    padding: 10px;
+}
+
+.dk-footer-form button {
+    padding: 10px 15px;
+    border: none;
+    background: #fff;
+    color: #111;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dk-footer-form button:hover {
+    background: #555;
+    color: #fff;
+}

@@ -1,0 +1,32 @@
+.card-equal {
+    height: 100%;              /* Stretch to fill grid */
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+
+  }
+
+  .card-equal img {
+    height: 100%;
+    object-fit: cover;          /* Make sure image covers card */
+    transition: transform 0.5s ease;
+    width: 100%;
+
+  }
+
+  .card-equal:hover img {
+    transform: scale(1.1);      /* Zoom effect */
+  }
+
+  .card-img-overlay {
+    background: rgba(0, 0, 0, 0.4);  /* Dark overlay for readability */
+    transition: background 0.3s ease;
+  }
+
+  .card-equal:hover .card-img-overlay {
+    background: rgba(0, 0, 0, 0.6);
+  }
+.mt-11{
+    margin-top: 10rem;
+}
