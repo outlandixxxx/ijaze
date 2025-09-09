@@ -3,7 +3,7 @@
 
     <!-- Sections -->
 
-    <section id="section1" style="width:100%; padding-top: 28px;">
+    <section id="index" style="width:100%; padding-top: 28px;">
         <div id="carouselExampleCaptions" class="carousel slide w-100" data-bs-ride="carousel" data-bs-wrap="true">
 
             <!-- Indicators -->
@@ -68,7 +68,7 @@
 
 
 
-    <section id="section2" class="content-section d-flex align-items-end justify-content-end mt-8">
+    <section id="breakingnews" class="content-section d-flex align-items-end justify-content-end mt-8">
         <div class="container-fluid px-4 text-end">
             <h2 class="mb-3">اخبار عاجلة</h2>
             <p class="lead fs-5">اكتشف ابرز الاخبار العاجلة </p>
@@ -168,7 +168,7 @@
 
 
 
-    <section id="section3" class="content-section d-flex align-items-end justify-content-end mt-8">
+    <section id="trending" class="content-section d-flex align-items-end justify-content-end mt-8">
         <div class="container-fluid px-4 text-end">
             <h2 class="mb-3">تراندين</h2>
             <p class="lead fs-5">اكتشف الاكثر مشاهدة</p>
@@ -273,13 +273,13 @@
                 <div class="swiper-pagination"></div>
             </div>
             <div class="mt-3 text-start">
-                <a href="#" class="btn btn-light fw-bold text-decoration-none">اكتشف اكثر</a>
+                <a href="{{ 'trending' }}" class="btn btn-light fw-bold text-decoration-none">اكتشف اكثر</a>
             </div>
         </div>
     </section>
 
 
-    <section id="section4" class="content-section d-flex align-items-end justify-content-end mt-8">
+    <section id="sport" class="content-section d-flex align-items-end justify-content-end mt-8">
         <div class="container-fluid px-4 text-end">
             <h2 class="mb-3">احداث رياضية</h2>
             <p class="lead fs-5">اكتشف ابرز الاخبار المتعلقة بالمجال الرياضي</p>
@@ -372,13 +372,13 @@
             </div>
             <!-- Discover More link -->
             <div class="mt-3 text-start">
-                <a href="#" class="btn btn-light fw-bold text-decoration-none">اكتشف اكثر</a>
+                <a href="{{ 'sport' }}" class="btn btn-light fw-bold text-decoration-none">اكتشف اكثر</a>
             </div>
         </div>
     </section>
 
 
-    <section id="section5" class="content-section d-flex align-items-end justify-content-end mt-8">
+    <section id="ai" class="content-section d-flex align-items-end justify-content-end mt-8">
         <div class="container-fluid px-4 text-end">
             <h2 class="mb-3">AI اخبار</h2>
             <p class="lead fs-5">كن على اطلاع باخبار متقنة بالذكاء الاصطناعي</p>
@@ -483,12 +483,12 @@
                 <div class="swiper-pagination"></div>
             </div>
             <div class="mt-3 text-start">
-                <a href="#" class="btn btn-light fw-bold text-decoration-none">اكتشف اكثر</a>
+                <a href="{{ 'ai' }}" class="btn btn-light fw-bold text-decoration-none">اكتشف اكثر</a>
             </div>
         </div>
     </section>
 
-    <section id="section6" class="py-5">
+    <section id="amusing" class="py-5">
         <div class="container-fluid">
             <h2 class="text-center mb-4">قسم الفيديوهات</h2>
             <div class="row g-3">

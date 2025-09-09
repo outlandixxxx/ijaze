@@ -99,7 +99,7 @@
  --}}
 
 
- <footer id="dk-footer" class="dk-footer" style="border-top: 5px, solide ;">
+ <footer id="dk-footer" class="dk-footer mt-8 mb-4" style="border-top: 5px, solide ;">
     <div class="container d-flex flex-wrap justify-content-between align-items-start gap-lg-4">
         <!-- Left Column: Info + Social -->
         <div class="dk-footer-box-info col-lg-4 col-md-12 mb-4 mb-lg-0">

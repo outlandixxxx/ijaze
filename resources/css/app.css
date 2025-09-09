@@ -81,6 +81,8 @@ margin-top: 6rem;
 
 }
 
+
+
 .card-ration {
  aspect-ratio: 9 / 16;
 }
@@ -116,6 +118,66 @@ margin-top: 6rem;
     z-index: 20;
 }
 
+.card video {
+    object-fit: cover; /* ensures video fills the frame */
+    border-radius: 15px;
+}
+.small-video:hover .play-button {
+    transform: scale(1.1);
+    transition: 0.3s;
+}
 
 
+/* Featured video */
+/* Featured video */
+#featuredVideo {
+    width: 100%;
+    max-width: 400px;     /* smaller width */
+    aspect-ratio: 9 / 16; /* vertical video */
+    margin: 0 auto 20px auto; /* center horizontally and add bottom margin */
+    position: relative;
+    background-color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+
+#featuredVideo video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Grid video cards */
+.video-card {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: black;
+    cursor: pointer;
+}
+
+.video-card-img {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+/* Play button */
+.play-button {
+    cursor: pointer;
+    transition: 0.3s;
+}
+.video-card:hover .play-button {
+    transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    #featuredVideo {
+        max-width: 90%;
+    }
+}
 

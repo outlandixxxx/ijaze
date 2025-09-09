@@ -5,17 +5,17 @@
             <div class="collapse navbar-collapse justify-content-center">
                 <ul class="navbar-nav gap-3 text-center">
                     <li class="nav-item"><a class="btn btn-outline-primary rounded-pill btn-lg px-3"
-                            href="#section1">ترفيه</a></li>
+                            href="{{ '/' }}#amusing">ترفيه</a></li>
                     <li class="nav-item"><a class="btn btn-outline-warning rounded-pill btn-lg px-3"
-                            href="#section2">AI اخبار</a></li>
+                            href="{{ '/' }}#ai">AI اخبار</a></li>
                     <li class="nav-item"><a class="btn btn-outline-secondary rounded-pill btn-lg px-3"
-                            href="#section3">رياضة</a></li>
+                            href="{{ '/' }}#sport">رياضة</a></li>
                     <li class="nav-item"><a class="btn btn-outline-info rounded-pill btn-lg px-3"
-                            href="#section4">تريندينغ</a></li>
+                            href="{{ '/' }}#trending">تريندينغ</a></li>
                     <li class="nav-item"><a class="btn btn-outline-danger rounded-pill btn-lg px-3"
-                            href="#section1">اخبار عاجلة</a></li>
+                            href="{{ '/' }}#breakingnews">اخبار عاجلة</a></li>
                     <li class="nav-item"><a class="btn btn-outline-success rounded-pill btn-lg px-3"
-                            href="#section1">الرئيسية</a></li>
+                            href="{{ '/' }}#index">الرئيسية</a></li>
                 </ul>
             </div>
             <a class="navbar-brand ms-auto" href="#"><img src="{{ asset('images/logo.png') }}" alt="Bootstrap"

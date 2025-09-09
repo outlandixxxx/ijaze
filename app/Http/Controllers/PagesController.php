@@ -11,6 +11,18 @@ class PagesController extends Controller
     }
 
     public function breakingnews() {
-        return view ('pages.breakingnews') ;
+        return view ('pages.breakingnews.breakingnews') ;
+    }
+
+    public function sport() {
+        return view ('pages.sport.sport') ;
+    }
+
+    public function trending() {
+        return view ('pages.trending.trending') ;
+    }
+
+    public function ai() {
+        return view ('pages.ai.ai') ;
     }
 }
