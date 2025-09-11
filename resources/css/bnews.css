@@ -1,9 +1,10 @@
 .card-equal {
-    height: 100%;              /* Stretch to fill grid */
-    border: none;
-    border-radius: 12px;
+    aspect-ratio: 9 / 16; /* portrait */
     overflow: hidden;
-    aspect-ratio: 16 / 9;
+    border-radius: 15px;
+    width: 270px; /* adjust size */
+    height: 90%;
+    margin: auto; /* center inside column */
 
   }
 

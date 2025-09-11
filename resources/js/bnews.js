@@ -26,12 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const showMoreButtons = document.querySelectorAll(".show-more-btn");
 
     showMoreButtons.forEach(button => {
         let currentIndex = 0;
-        const newsItems = button.closest(".card-body").querySelectorAll(".news-item");
+        // find items inside the same card-body
+        const newsItems = button.closest(".card-body").querySelectorAll(".card-item");
 
         // Show first 10 on load
         for (let i = 0; i < 10 && i < newsItems.length; i++) {
@@ -54,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
 
 //trending video page
 

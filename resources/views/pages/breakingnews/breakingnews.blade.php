@@ -35,7 +35,7 @@
 
 
             <div class="tab-pane fade show active " id="politic" role="tabpanel" aria-labelledby="politic-tab">
-                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 mt-3 justify-content-end" id="card-container">
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 mt-3 justify-content-end card-container">
                     <!-- Card 1 -->
 
                     <div class="col card-item d-none">
@@ -110,6 +110,7 @@
                     </div>
                     <!-- Repeat for all cards ... -->
                 </div>
+
 
                 <!-- Show More Button (outside row) -->
                 <div class="text-center mt-3">

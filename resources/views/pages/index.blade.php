@@ -554,7 +554,7 @@
 
             </div>
             <div class="mt-3 text-start">
-                <a href="#" class="btn btn-light fw-bold text-decoration-none">اكتشف اكثر</a>
+                <a href="{{ 'amusing' }}" class="btn btn-light fw-bold text-decoration-none">اكتشف اكثر</a>
             </div>
         </div>
     </section>

@@ -25,4 +25,8 @@ class PagesController extends Controller
     public function ai() {
         return view ('pages.ai.ai') ;
     }
+
+    public function amusing() {
+        return view ('pages.amusing.amusing') ;
+    }
 }
