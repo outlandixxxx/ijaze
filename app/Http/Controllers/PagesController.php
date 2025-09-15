@@ -29,4 +29,9 @@ class PagesController extends Controller
     public function amusing() {
         return view ('pages.amusing.amusing') ;
     }
+
+     public function imagenews() {
+        return view ('pages.image-news') ;
+    }
+    
 }

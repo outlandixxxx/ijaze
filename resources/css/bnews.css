@@ -1,33 +1,51 @@
 .card-equal {
-    aspect-ratio: 9 / 16; /* portrait */
+    aspect-ratio: 9 / 16;     /* portrait shape */
     overflow: hidden;
     border-radius: 15px;
-    width: 270px; /* adjust size */
-    height: 90%;
-    margin: auto; /* center inside column */
+    margin: auto;             /* center inside column */
+    display: flex;
+    flex-direction: column;
+}
 
-  }
-
-  .card-equal img {
-    height: 100%;
-    object-fit: cover;          /* Make sure image covers card */
-    transition: transform 0.5s ease;
+.card-equal img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;        /* Make sure image covers card */
+    transition: transform 0.5s ease;
+}
 
-  }
+.card-equal:hover img {
+    transform: scale(1.1);    /* Zoom effect */
+}
 
-  .card-equal:hover img {
-    transform: scale(1.1);      /* Zoom effect */
-  }
-
-  .card-img-overlay {
+.card-img-overlay {
     background: rgba(0, 0, 0, 0.4);  /* Dark overlay for readability */
     transition: background 0.3s ease;
-  }
+}
 
-  .card-equal:hover .card-img-overlay {
+.card-equal:hover .card-img-overlay {
     background: rgba(0, 0, 0, 0.6);
-  }
+}
+
+
+
 .mt-11{
     margin-top: 10rem;
+}
+
+@media (max-width: 768px) {
+    li a h4 {
+        max-width: 150px; /* smaller width on mobile */
+    }
+}
+
+/* Hover effect: scale up thumbnail */
+ul li a div:hover {
+    transform: scale(1.05);
+}
+
+/* Optional: make overlay and button a bit bigger on hover */
+ul li a div:hover .transition-hover {
+    transform: scale(1.2);
+    transition: transform 0.3s;
 }

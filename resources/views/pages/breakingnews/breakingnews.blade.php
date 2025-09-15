@@ -35,87 +35,35 @@
 
 
             <div class="tab-pane fade show active " id="politic" role="tabpanel" aria-labelledby="politic-tab">
-                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 mt-3 justify-content-end card-container">
-                    <!-- Card 1 -->
+                 <div class="row p-4">
+            <div class="col-sm-12">
+                <div class="card text-white text-end  bg-transparent">
+                    <div class="card-body" style="background-color: #171616 ;border-radius: 30px;">
+                       
+                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-6 g-2 mt-3 justify-content-end card-container"
+                            >
 
-                    <div class="col card-item d-none">
-                        <div class="card bg-dark text-white card-equal">
-                            <img src="https://picsum.photos/600/400?random=1" class="card-img" alt="...">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h5 class="card-title">Card title 1</h5>
-                                <p class="card-text">This is a wider card with supporting text.</p>
-                            </div>
+                            <!-- Example with more than 10 items -->
+                            @for ($i = 1; $i <= 30; $i++)
+                                <div class="col card-item d-none">
+                                    <div class="card bg-dark text-white card-equal">
+                                        <img src="https://picsum.photos/600/400?random=1" class="card-img" alt="...">
+                                        <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                            <h5 class="card-title">Card title 1</h5>
+                                            <p class="card-text">This is a wider card with supporting text.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endfor
                         </div>
-                    </div>
 
-                    <!-- Card 2 -->
-                    <div class="col card-item d-none">
-                        <div class="card bg-dark text-white card-equal">
-                            <img src="https://picsum.photos/600/400?random=2" class="card-img" alt="...">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h5 class="card-title">Card title 2</h5>
-                                <p class="card-text">Another supporting text inside overlay.</p>
-                            </div>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-dark px-4 show-more-btn">عرض المزيد</button>
                         </div>
                     </div>
-                    <!-- Card 2 -->
-                    <div class="col card-item d-none">
-                        <div class="card bg-dark text-white card-equal">
-                            <img src="https://picsum.photos/600/400?random=2" class="card-img" alt="...">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h5 class="card-title">Card title 2</h5>
-                                <p class="card-text">Another supporting text inside overlay.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="col card-item d-none">
-                        <div class="card bg-dark text-white card-equal">
-                            <img src="https://picsum.photos/600/400?random=2" class="card-img" alt="...">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h5 class="card-title">Card title 2</h5>
-                                <p class="card-text">Another supporting text inside overlay.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="col card-item d-none">
-                        <div class="card bg-dark text-white card-equal">
-                            <img src="https://picsum.photos/600/400?random=2" class="card-img" alt="...">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h5 class="card-title">Card title 2</h5>
-                                <p class="card-text">Another supporting text inside overlay.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="col card-item d-none">
-                        <div class="card bg-dark text-white card-equal">
-                            <img src="https://picsum.photos/600/400?random=2" class="card-img" alt="...">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h5 class="card-title">Card title 2</h5>
-                                <p class="card-text">Another supporting text inside overlay.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="col card-item d-none">
-                        <div class="card bg-dark text-white card-equal">
-                            <img src="https://picsum.photos/600/400?random=2" class="card-img" alt="...">
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h5 class="card-title">Card title 2</h5>
-                                <p class="card-text">Another supporting text inside overlay.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Repeat for all cards ... -->
                 </div>
-
-
-                <!-- Show More Button (outside row) -->
-                <div class="text-center mt-3">
-                    <button class="btn btn-primary" id="showMoreBtn">المزيد</button>
-                </div>
+            </div>
+        </div>
             </div>
 
 

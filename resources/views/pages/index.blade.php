@@ -23,29 +23,31 @@
                 <div class="carousel-item active">
                     <img src="{{ asset('images/carousel/1.jpg') }}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>First slide label</h5>
-                        <p>Some representative placeholder content for the first slide.</p>
+                        <h3>الخبر الاول</h3>
+                       <a href="{{'imagenews' }}" style='  color: #ffffff;  text-decoration: none;' ><h5> تسجّل الآن لحضور المؤتمر الدولي العاشر ليونيكود (Unicode Conference)، 
+                        الذي سيعقد في 10-12 آذار 1997 بمدينة مَايِنْتْس </h5> </a>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="{{ asset('images/carousel/2.jpg') }}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Second slide label</h5>
-                        <p>Some representative placeholder content for the second slide.</p>
+                        <h5> قطاعات الصناعة</h5>
+                    <a href="">   <p>افة قطاعات الصناعة على الشبكة العالمية انترنيت ويونيكود، حيث ستتم، على الصعيدين الدولي والمحلي</p>
+                    </a>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="{{ asset('images/carousel/3.jpg') }}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Third slide label</h5>
-                        <p>Some representative placeholder content for the third slide.</p>
+                        <h5>تصميم النصوص والحوسبة متعددة اللغات.</h5>
+                        <a href=""><p>تَتَحَدَّث اَلْأَبْيَات عَنْ لَحْظَة وَدَاع يَسْتَغْرِب فِيهَا اَلشَّاعِر أَنْ لَا يَبْكِي مِنْ أَلَم اَلْفِرَاق</p></a>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="{{ asset('images/carousel/4.jpg') }}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Fourth slide label</h5>
-                        <p>Some representative placeholder content for the fourth slide.</p>
+                        <h5> اَلتَّعْبِير عَنْهُ بِالْكَلَامِ</h5>
+                        <a href=""><p>وَيُقَسِّم فِي آخَر اَلْأَبْيَات عَلَى أَنَّ تَوَقُّف دَمْعه لَا يَعْنِي نِهَايَة حَيّه</p></a>
                     </div>
                 </div>
             </div>

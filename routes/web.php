@@ -11,3 +11,5 @@ Route::get('/sport', [PagesController::class, 'sport'])->name('sport');
 Route::get('/trending', [PagesController::class, 'trending'])->name('trending');
 Route::get('/ai', [PagesController::class, 'ai'])->name('ai');
 Route::get('/amusing', [PagesController::class, 'amusing'])->name('amusing');
+Route::get('/imagenews', [PagesController::class, 'imagenews'])->name('imagenews');
+

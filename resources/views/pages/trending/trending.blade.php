@@ -22,6 +22,7 @@
             </li>
 
         </ul>
+
         <div class="tab-content mt-3" id="myTabContent">
 
 
@@ -32,7 +33,7 @@
 
                     <h3 class="mb-3 mt-3">فيديوهات <i class="fa-solid fa-circle-play fa-xl" style="color: #63E6BE;"></i>
                     </h3>
-                    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
+                    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
 
 
                         @for ($i = 1; $i <= 30; $i++)
@@ -58,86 +59,80 @@
 
                                 </div>
                             </div>
-                        @endfor
-                    </div>
-
-                    {{-- Show more button --}}
-                    <div class="text-center mt-3">
-                        <button id="showMoreBtn" class="btn btn-dark px-4">عرض المزيد</button>
-                    </div>
-                </div>
-
-
-
-
-
-
-                <div class="row mt-3 justify-content-end text-end" id="card-container-written ">
-                    <h3 class="mt-3 mb-3">مكتوبة <i class="fa-solid fa-newspaper fa-xl" style="color: #63E6BE;"></i></h3>
-
-
-                    {{--                   <div class="card text-white text-end border border-white bg-transparent">
-                        <div class="card-body">
-
-                            <!-- Example with more than 10 items -->
-                            @for ($i = 1; $i <= 30; $i++)
-                                <a href="#" style=" text-decoration: none; color: white;">
-                                    <p class="card-text-end news-item d-none">خبر {{ $i }}</p>
-                                </a>
-                            @endfor
-
-                            <div class="text-center mt-3">
-                                <button class="btn btn-dark px-4 show-more-btn">عرض المزيد</button>
-
+                        @endfor   
+                           
+                      {{-- Show more button --}}
+                          <div class="text-center mt-3">
+                                <button  class="btn btn-dark px-4 show-more-btn">عرض المزيد</button>
                             </div>
-                        </div>
-                    </div> --}}
+                    </div>
+                    
+
+                   
 
 
-                    <div class="container my-4">
-                        <div class="card-body"> <!-- Wrap all news items here -->
+                    <div class="row mt-3 justify-content-end text-end" id="card-container-written ">
+                        <h3 class="mt-3 mb-3">مكتوبة <i class="fa-solid fa-newspaper fa-xl" style="color: #63E6BE;"></i>
+                        </h3>
 
-                            @for ($i = 1; $i <= 30; $i++)
-                                <div class="card text-white d-flex flex-row-reverse align-items-center news-item d-none"
-                                     style="background-color: black; border: none; border-radius: 15px; overflow: hidden; padding: 10px;">
+                        <div class="container my-4">
+                            <div class="card text-white text-end  bg-transparent">
+                                <div class="card-body" style="background-color: #171616 ;border-radius: 30px;">
 
-                                    <!-- Small Image (right side) -->
-                                    <div style="flex-shrink: 0;">
-                                        <img src="{{ asset('images/documentary/card1.png') }}"
-                                             alt="صورة"
-                                             style="width:100px; height:100px; object-fit:cover; border-radius: 5px;">
-                                    </div>
 
-                                    <!-- Text (left side) -->
-                                    <div class="card-body text-end ms-2 p-0">
-                                        <h5 class="card-title m-3" style="color: white;">هذا عنوان الفيديو {{ $i }}</h5>
-                                        <p class="card-text m-3" style="color: #ccc;">وصف قصير للفيديو أو تفاصيل أخرى هنا</p>
+                                    <!-- Example with more than 10 items -->
+                                    @for ($i = 1; $i <= 30; $i++)
+                                        <div class="card text-white d-flex flex-row-reverse align-items-center news-item d-none mt-1"
+                                            style="background-color: black; border: none; border-radius: 15px; overflow: hidden; padding: 5px;">
+
+                                            <!-- Small Image (right side) -->
+                                            <div style="flex-shrink: 0;">
+                                                <img src="{{ asset('images/documentary/card1.png') }}" alt="صورة"
+                                                    style="width:100px; height:100px; object-fit:cover; border-radius: 5px;">
+                                            </div>
+
+                                            <!-- Text (left side) -->
+                                            <div class="card-body text-end ms-2 p-0">
+                                                <h6 class="card-title m-3" style="color: white;">هذا عنوان الفيديو
+                                                    {{ $i }}
+                                                </h6>
+                                                <p class="card-text m-3" style="color: #ccc;">وصف قصير للفيديو أو تفاصيل
+                                                    أخرى
+                                                    هنا</p>
+                                            </div>
+
+                                        </div>
+                                    @endfor
+
+                                    <div class="text-center mt-3">
+                                        <button class="btn btn-dark px-4 show-more-btn">عرض المزيد</button>
                                     </div>
 
                                 </div>
-                            @endfor
-
-                            <div class="text-center mt-3">
-                                <button class="btn btn-dark px-4 show-more-btn">عرض المزيد</button>
                             </div>
 
                         </div>
+
                     </div>
-
-
-
                 </div>
+
+
+
+
+
+
+
 
 
             </div>
 
 
-        </div>
-    </div>
 
-    <div class="tab-pane fade" id="sport" role="tabpanel" aria-labelledby="sport-tab">...</div>
-    <div class="tab-pane fade" id="amusing" role="tabpanel" aria-labelledby="amusing-tab">...</div>
-    </div>
+
+
+            <div class="tab-pane fade" id="sport" role="tabpanel" aria-labelledby="sport-tab">...</div>
+            <div class="tab-pane fade" id="amusing" role="tabpanel" aria-labelledby="amusing-tab">...</div>
+        </div>
 
 
     </div>

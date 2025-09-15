@@ -71,39 +71,49 @@
  <div class="container-fluid my-4 text-end">
 
     <h3 class="mb-3 mt-3">فيديوهات
-        <i class="fa-solid fa-circle-play fa-xl" style="color: #63E6BE;"></i>
+        <i class="fa-solid fa-circle-play fa-xl" style="color: #fefffe;"></i>
     </h3>
 
     <!-- Featured video -->
     <div id="featuredVideo" class="mb-4">
-        <p style="color:#ccc;">اختر فيديو للعرض هنا</p>
+        <!-- The first video will load automatically here via JS -->
+        <p style="color:#cf3131;">اختر فيديو للعرض هنا</p>
     </div>
 
     <!-- Video grid -->
-    <div class="row gx-4 gy-5" id="videoGrid">
+    <div class="row text-end gx-4 gy-5" id="videoGrid">
         @for ($i = 1; $i <= 30; $i++)
-            <div class="col-6 col-sm-4 col-md-3 col-lg-2 card-item d-none">
-                <div class="video-card small-video position-relative"
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2 card-item d-none text-end">
+                <div class="video-card small-video featured text-end position-relative"
                      data-video="{{ asset('images/videos/video1.mp4') }}"
                      data-title="فيديو {{ $i }}">
+                    
+                    <!-- Thumbnail -->
                     <img src="{{ asset('images/videos/video1.png') }}"
                          class="video-card-img"
-                         alt="Video {{ $i }}">
+                         alt="Video {{ $i }}"
+                         style="border-radius: 0.5rem; width:100%; aspect-ratio:16/9; object-fit:cover;">
+                    
+                    <!-- Play button overlay -->
                     <div class="play-button position-absolute top-50 start-50 translate-middle">
                         <i class="bi bi-play-circle-fill" style="font-size: 2rem; color: white;"></i>
                     </div>
+                    
+                    <!-- Title -->
                     <div class="text-center p-1">
-                        <h6 class="mb-0" style="color:black;">فيديو {{ $i }}</h6>
+                        <h6 class="mb-0" style="color:rgb(255, 255, 255);">فيديو {{ $i }}</h6>
                     </div>
                 </div>
             </div>
         @endfor
     </div>
 
+    <!-- Show more button -->
     <div class="text-center mt-3">
-        <button id="showMoreBtn" class="btn btn-dark px-4">عرض المزيد</button>
+        <button class="btn btn-dark px-4 show-more-btn">عرض المزيد</button>
     </div>
 </div>
+
 
 
 
