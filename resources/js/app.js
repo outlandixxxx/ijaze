@@ -1,8 +1,10 @@
 //import Alpine from 'alpinejs';
 // resources/js/app.js
 
-import 'bootstrap';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+//import 'bootstrap';
+import * as bootstrap from 'bootstrap';   // correct way
+
+//import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './back-to-top.js';
 import './bnews.js';
 

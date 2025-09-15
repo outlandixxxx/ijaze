@@ -4,17 +4,17 @@
         <div class="container-fluid">
             <div class="collapse navbar-collapse justify-content-center">
                 <ul class="navbar-nav gap-3 text-center">
-                    <li class="nav-item"><a class="btn btn-outline-primary rounded-pill btn-lg px-3"
+                    <li class="nav-item"><a class="btn btn-outline-light rounded-pill btn-lg px-3"
                             href="{{ '/' }}#amusing">ترفيه</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-warning rounded-pill btn-lg px-3"
+                    <li class="nav-item"><a class="btn btn-outline-light rounded-pill btn-lg px-3"
                             href="{{ '/' }}#ai">AI اخبار</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-secondary rounded-pill btn-lg px-3"
+                    <li class="nav-item"><a class="btn btn-outline-light rounded-pill btn-lg px-3"
                             href="{{ '/' }}#sport">رياضة</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-info rounded-pill btn-lg px-3"
+                    <li class="nav-item"><a class="btn btn-outline-light rounded-pill btn-lg px-3"
                             href="{{ '/' }}#trending">تريندينغ</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-danger rounded-pill btn-lg px-3"
+                    <li class="nav-item"><a class="btn btn-outline-light rounded-pill btn-lg px-3"
                             href="{{ '/' }}#breakingnews">اخبار عاجلة</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-success rounded-pill btn-lg px-3"
+                    <li class="nav-item active" aria-current="page"><a class="btn btn-outline-light rounded-pill active btn-lg px-3 "
                             href="{{ '/' }}#index">الرئيسية</a></li>
                 </ul>
             </div>
@@ -52,3 +52,20 @@
             </ul>
         </div>
     </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelectorAll(".navbar-nav .btn");
+
+            navLinks.forEach(link => {
+                link.addEventListener("click", function () {
+                    // Remove active from all
+                    navLinks.forEach(l => l.classList.remove("active"));
+
+                    // Add active only to clicked one
+                    this.classList.add("active");
+                });
+            });
+        });
+        </script>

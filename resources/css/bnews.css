@@ -49,3 +49,10 @@ ul li a div:hover .transition-hover {
     transform: scale(1.2);
     transition: transform 0.3s;
 }
+
+
+.navbar-nav .btn.active {
+    background-color: #f1ecb2; /* permanent hover color */
+    color: #000;
+    border-color: #83b83f;
+}

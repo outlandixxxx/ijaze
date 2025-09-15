@@ -9,33 +9,33 @@
                 <ul class="list-unstyled d-flex flex-md-column gap-4 gap-md-3">
                     <li>
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}"
-                           target="_blank" class="text-decoration-none text-primary">
+                            target="_blank" class="text-decoration-none text-primary">
                             <i class="fa-brands fa-square-facebook fa-2xl"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}"
-                           target="_blank" class="text-decoration-none text-white">
-<i class="fa-brands fa-square-x-twitter fa-2xl" ></i>                    </a>
+                        <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}" target="_blank"
+                            class="text-decoration-none text-white">
+                            <i class="fa-brands fa-square-x-twitter fa-2xl"></i> </a>
                     </li>
                     <li>
-                        <a href="https://api.whatsapp.com/send?text={{ urlencode(request()->fullUrl()) }}"
-                           target="_blank" class="text-decoration-none text-success">
+                        <a href="https://api.whatsapp.com/send?text={{ urlencode(request()->fullUrl()) }}" target="_blank"
+                            class="text-decoration-none text-success">
                             <i class="fa-brands fa-square-whatsapp fa-2xl"></i>
                         </a>
                     </li>
                     <li>
                         <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(request()->fullUrl()) }}"
-                           target="_blank" class="text-decoration-none text-primary">
-<i class="fa-brands fa-square-linkedin fa-2xl"></i>                        </a>
+                            target="_blank" class="text-decoration-none text-primary">
+                            <i class="fa-brands fa-square-linkedin fa-2xl"></i> </a>
                     </li>
 
                     <li>
-            <a href="javascript:void(0);" onclick="copyPageLink()" 
-               class="text-decoration-none text-white" title="نسخ الرابط">
-                <i class="fa-solid fa-link fa-2xl"></i>
-            </a>
-        </li>
+                        <a href="javascript:void(0);" onclick="copyPageLink()" class="text-decoration-none text-white"
+                            title="نسخ الرابط">
+                            <i class="fa-solid fa-link fa-2xl"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
 
@@ -47,7 +47,7 @@
                         @for ($i = 1; $i <= 10; $i++)
                             <li class="mb-2">
                                 <a href="#"
-                                   class="d-flex justify-content-end align-items-center gap-2 flex-nowrap text-decoration-none text-white">
+                                    class="d-flex justify-content-end align-items-center gap-2 flex-nowrap text-decoration-none text-white">
                                     <h4 class="mb-0 fs-6 text-truncate" style="max-width: 200px;">
                                         عنوان الخبر {{ $i }}
                                     </h4>
@@ -65,10 +65,10 @@
                             <li>
                                 <a href="#" class="text-decoration-none d-block">
                                     <div class="position-relative overflow-hidden rounded ms-auto"
-                                         style="width: 200px; transition: transform 0.3s;">
+                                        style="width: 200px; transition: transform 0.3s;">
                                         <!-- Video thumbnail -->
                                         <img src="{{ asset('images/videos/video' . $i . '.png') }}" class="img-fluid"
-                                             alt="Video {{ $i }}">
+                                            alt="Video {{ $i }}">
 
                                         <!-- Overlay title -->
                                         <div
@@ -92,46 +92,55 @@
             <div class="col-12 col-md-7">
                 <h3 class="mb-3">الخبر الأول</h3>
 
-                  @if($news->type === 'image')
-                
-                <!-- Image -->
-                <div class="text-center">
-                    <img src="{{ asset('images/carousel/3.jpg') }}" class="rounded img-thumbnail img-fluid"
-                         alt="الخبر الأول">
-                </div>
+                @if ($news->type === 'image')
 
-                <div class="mb-3  text-start">
-                    <span class="badge text-secondary me-1">بقلم نخنى يؤؤؤ</span>
-                </div>
+                    <!-- Image -->
+                    <div class="text-center">
+                        <img src="{{ asset('images/carousel/3.jpg') }}" class="rounded img-thumbnail img-fluid"
+                            alt="الخبر الأول">
+                    </div>
 
-                <!-- Content -->
-                <div class="mb-3">
-                    <p>ضت المحكمة الدستورية بإلغاء انتخاب الطاهر الفلالي عضوًا بمجلس المستشارين عن الهيئة الناخبة لممثلي الغرف الفلاحية بجهات الرباط ــ سلا ــ القنيطرة وبني ملال ــ خنيفرة والدار البيضاء ــ سطات، بموجب الانتخاب الجزئي الذي أُجري في فاتح يوليوز الماضي.</p>
-                    <p>نَت المحكمة قرارها رقم 258/25 على عريضة مسجلة بأمانتها العامة بتاريخ الرابع عشر من يوليوز الماضي، قدّمها والي جهة بني ملال ــ خنيفرة عامل عمالة إقليم بني ملال، بصفته هاته، طالبًا فيها التصريح ببطلان نتيجة الانتخاب الجزئي المذكور.</p>
-                    <p>بيّنت المحكمة ذاتها أن الحكم الابتدائي الصادر عن المحكمة الابتدائية ببني ملال، الذي سبق أن ألغى قرار رفض ترشيح المعني بالأمر، خالف مقتضيات المادة 24 من القانون التنظيمي رقم 28.11 المتعلق بمجلس المستشارين.
+                    <div class="mb-3  text-start">
+                        <span class="badge text-secondary me-1">بقلم نخنى يؤؤؤ</span>
+                    </div>
 
-كما شدّدت “الدستورية” على أن صفة الناخب، باعتبارها شرطًا جوهريًا للترشح، لا تُستمدّ إلا من التسجيل القانوني في اللوائح الانتخابية العامة، وفق المقتضيات القانونية ذات الصلة، لا سيما القانون التنظيمي رقم 28.11 المذكور والقانون رقم57.11 المتعلق باللوائح الانتخابية العامة، اللذين يؤطّران عملية التسجيل وشروطها بدقة ويربطانها مبدئيا بالإقامة الفعلية وبالبطاقة الوطنية.
+                    <!-- Content -->
+                    <div class="mb-3">
+                        <p>ضت المحكمة الدستورية بإلغاء انتخاب الطاهر الفلالي عضوًا بمجلس المستشارين عن الهيئة الناخبة لممثلي
+                            الغرف الفلاحية بجهات الرباط ــ سلا ــ القنيطرة وبني ملال ــ خنيفرة والدار البيضاء ــ سطات، بموجب
+                            الانتخاب الجزئي الذي أُجري في فاتح يوليوز الماضي.</p>
+                        <p>نَت المحكمة قرارها رقم 258/25 على عريضة مسجلة بأمانتها العامة بتاريخ الرابع عشر من يوليوز الماضي،
+                            قدّمها والي جهة بني ملال ــ خنيفرة عامل عمالة إقليم بني ملال، بصفته هاته، طالبًا فيها التصريح
+                            ببطلان نتيجة الانتخاب الجزئي المذكور.</p>
+                        <p>بيّنت المحكمة ذاتها أن الحكم الابتدائي الصادر عن المحكمة الابتدائية ببني ملال، الذي سبق أن ألغى
+                            قرار رفض ترشيح المعني بالأمر، خالف مقتضيات المادة 24 من القانون التنظيمي رقم 28.11 المتعلق بمجلس
+                            المستشارين.
 
-وأمرت المحكمة، على ضوء هذه المعطيات، بتبليغ قرارها إلى كل من رئيس مجلس المستشارين والسلطة الإدارية التي تلقت الترشيحات بالدائرة الانتخابية لجهات الرباط ــ سلا ــ القنيطرة وبني ملال ــ خنيفرة والدار البيضاء ــ سطات، وبنشره في الجريدة الرسمية.
+                            كما شدّدت “الدستورية” على أن صفة الناخب، باعتبارها شرطًا جوهريًا للترشح، لا تُستمدّ إلا من
+                            التسجيل القانوني في اللوائح الانتخابية العامة، وفق المقتضيات القانونية ذات الصلة، لا سيما
+                            القانون التنظيمي رقم 28.11 المذكور والقانون رقم57.11 المتعلق باللوائح الانتخابية العامة، اللذين
+                            يؤطّران عملية التسجيل وشروطها بدقة ويربطانها مبدئيا بالإقامة الفعلية وبالبطاقة الوطنية.
 
-كما دعت إلى إجراء انتخابات جزئية لشغل المقعد الشاغر استنادًا إلى مقتضيات المادة 92 من القانون التنظيمي رقم 28.11 الخاص بمجلس المستشارين.</p>
-                </div>
+                            وأمرت المحكمة، على ضوء هذه المعطيات، بتبليغ قرارها إلى كل من رئيس مجلس المستشارين والسلطة
+                            الإدارية التي تلقت الترشيحات بالدائرة الانتخابية لجهات الرباط ــ سلا ــ القنيطرة وبني ملال ــ
+                            خنيفرة والدار البيضاء ــ سطات، وبنشره في الجريدة الرسمية.
 
+                            كما دعت إلى إجراء انتخابات جزئية لشغل المقعد الشاغر استنادًا إلى مقتضيات المادة 92 من القانون
+                            التنظيمي رقم 28.11 الخاص بمجلس المستشارين.</p>
+                    </div>
                 @elseif($news->type === 'video')
-        <!-- YouTube Video -->
-        <div class="ratio ratio-16x9 mb-3">
-            <iframe src="https://www.youtube.com/embed/{{ $news->video_id }}"
-                    title="{{ $news->title }}"
-                    frameborder="0"
-                    allowfullscreen></iframe>
-        </div>
-
-                <!-- Tags / Categories -->
-                <div class="mb-3 text-end">
-                    <span class="badge bg-light me-1 text-dark">رياضة</span>
-                    <span class="badge bg-light me-1 text-dark">سياسة</span>
-                    <span class="badge bg-light text-dark">ثقافة</span>
-                </div>
+                    <!-- YouTube Video -->
+                    <div class="ratio ratio-16x9 mb-3">
+                        <iframe src="https://www.youtube.com/embed/{{ $news->video_id }}" title="{{ $news->title }}"
+                            frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    @endif
+                    <!-- Tags / Categories -->
+                    <div class="mb-3 text-end">
+                        <span class="badge bg-light me-1 text-dark">رياضة</span>
+                        <span class="badge bg-light me-1 text-dark">سياسة</span>
+                        <span class="badge bg-light text-dark">ثقافة</span>
+                    </div>
             </div>
 
         </div>
