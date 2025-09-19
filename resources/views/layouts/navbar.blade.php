@@ -1,20 +1,20 @@
     <!-- Navbar -->
     <!-- Large screens navbar (centered) -->
-    <nav class="navbar navbar-expand-lg navbar-custom fixed-top d-none d-lg-flex">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-custom fixed-top d-none d-lg-flex">
         <div class="container-fluid">
             <div class="collapse navbar-collapse justify-content-center">
                 <ul class="navbar-nav gap-3 text-center">
-                    <li class="nav-item"><a class="btn btn-outline-light rounded-pill btn-lg px-3"
-                            href="{{ '/' }}#amusing">ترفيه</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-light rounded-pill btn-lg px-3"
-                            href="{{ '/' }}#ai">AI اخبار</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-light rounded-pill btn-lg px-3"
+                    <li class="nav-item"><a class="btn btn-outline-light noto-sans-arabic  px-3"
+                            href="{{ '/' }}#amusing">منوعات</a></li>
+                    <li class="nav-item"><a class="btn btn-outline-light noto-sans-arabic px-3"
+                            href="{{ '/' }}#ai"> AI بالـ </a></li>
+                    <li class="nav-item"><a class="btn btn-outline-light noto-sans-arabic px-3"
                             href="{{ '/' }}#sport">رياضة</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-light rounded-pill btn-lg px-3"
-                            href="{{ '/' }}#trending">تريندينغ</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-light rounded-pill btn-lg px-3"
-                            href="{{ '/' }}#breakingnews">اخبار عاجلة</a></li>
-                    <li class="nav-item active" aria-current="page"><a class="btn btn-outline-light rounded-pill active btn-lg px-3 "
+                    <li class="nav-item"><a class="btn btn-outline-light noto-sans-arabic px-3"
+                            href="{{ '/' }}#trending">شاهد</a></li>
+                    <li class="nav-item"><a class="btn btn-outline-light noto-sans-arabic px-3"
+                            href="{{ '/' }}#breakingnews">أخبار </a></li>
+                    <li class="nav-item " aria-current="page"><a class="btn btn-outline-light noto-sans-arabic active px-3 "
                             href="{{ '/' }}#index">الرئيسية</a></li>
                 </ul>
             </div>

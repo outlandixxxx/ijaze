@@ -35,3 +35,6 @@ Route::post('/admin/post/store', [AdminController::class, 'storepost'])->name('s
 Route::post('/admin/post/update', [AdminController::class, 'updatepost'])->name('updatepost');
 Route::post('/admin/post/delete', [AdminController::class, 'deletepost'])->name('deletepost');
 
+
+Route::get('/test', [AdminController::class, 'test'])->name('test');
+

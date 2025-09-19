@@ -13,8 +13,9 @@
 
                         <!-- Example with more than 10 items -->
                         @for ($i = 1; $i <= 30; $i++)
+                        <a href="{{ 'imagenews' }}" class="text-decoration-none">
                             <div class="card text-white d-flex flex-row-reverse align-items-center news-item d-none mt-1"
-                                style="background-color: black; border: none; border-radius: 15px; overflow: hidden; padding: 5px;">
+                                style="background-color: black; border: none; border-radius: 15px; overflow: hidden; padding: 5px; cursor: pointer;">
 
                                 <!-- Small Image (right side) -->
                                 <div style="flex-shrink: 0;">
@@ -24,12 +25,12 @@
 
                                 <!-- Text (left side) -->
                                 <div class="card-body text-end ms-2 p-0">
-                                    <h6 class="card-title m-3" style="color: white;">هذا عنوان الفيديو {{ $i }}
-                                    </h6>
+                                    <h6 class="card-title m-3" style="color: white;">هذا عنوان الفيديو {{ $i }}</h6>
                                     <p class="card-text m-3" style="color: #ccc;">وصف قصير للفيديو أو تفاصيل أخرى هنا</p>
                                 </div>
 
                             </div>
+                        </a>
                         @endfor
 
                         <div class="text-center mt-3">
@@ -45,6 +46,7 @@
                                 style="color: #f52c2c;"></i></h5>
                         <!-- Example with more than 10 items -->
                         @for ($i = 1; $i <= 30; $i++)
+                        <a href="{{ 'imagenews' }}" class="text-decoration-none">
                             <div class="card text-white d-flex flex-row-reverse align-items-center news-item d-none mt-1"
                                 style="background-color: black; border: none; border-radius: 15px; overflow: hidden; padding: 5px;">
 
@@ -62,6 +64,7 @@
                                 </div>
 
                             </div>
+                        </a>
                         @endfor
 
                         <div class="text-center mt-3">
@@ -80,6 +83,7 @@
                                 style="color: #f9f3dc;"></i></h5>
                         <!-- Example with more than 10 items -->
                         @for ($i = 1; $i <= 30; $i++)
+                        <a href="{{ 'imagenews' }}" class="text-decoration-none">
                             <div class="card text-white d-flex flex-row-reverse align-items-center news-item d-none mt-1"
                                 style="background-color: black; border: none; border-radius: 15px; overflow: hidden; padding: 5px;">
 
@@ -97,6 +101,7 @@
                                 </div>
 
                             </div>
+                        </a>
                         @endfor
 
                         <div class="text-center mt-3">
@@ -113,6 +118,7 @@
 
                         <!-- Example with more than 10 items -->
                         @for ($i = 1; $i <= 30; $i++)
+                        <a href="{{ 'imagenews' }}" class="text-decoration-none">
                             <div class="card text-white d-flex flex-row-reverse align-items-center news-item d-none mt-1"
                                 style="background-color: black; border: none; border-radius: 15px; overflow: hidden; padding: 5px;">
 
@@ -130,6 +136,7 @@
                                 </div>
 
                             </div>
+                            </a>
                         @endfor
 
                         <div class="text-center mt-3">

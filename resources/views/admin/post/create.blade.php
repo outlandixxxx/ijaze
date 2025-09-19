@@ -87,3 +87,25 @@
 </div>
 
 @endsection
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const mediaSelect = document.getElementById("media_type");
+        const imageInput = document.getElementById("image_input");
+        const videoInput = document.getElementById("video_input");
+
+        function toggleInputs() {
+            if (mediaSelect.value === "video") {
+                imageInput.classList.add("d-none");
+                videoInput.classList.remove("d-none");
+            } else {
+                videoInput.classList.add("d-none");
+                imageInput.classList.remove("d-none");
+            }
+        }
+
+        toggleInputs();
+        mediaSelect.addEventListener("change", toggleInputs);
+    });
+    </script>

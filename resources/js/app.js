@@ -7,10 +7,6 @@ import * as bootstrap from 'bootstrap';   // correct way
 //import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './back-to-top.js';
 import './bnews.js';
-
-
-
-
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 
@@ -43,8 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 new Swiper(".cardSwiper2", {
-    slidesPerView: 6,
-    spaceBetween: 30,
+    slidesPerView: 5,
+    spaceBetween: 20,
     loop: true,
     navigation: {
         nextEl: ".swiper-button-next",
@@ -68,6 +64,8 @@ new Swiper(".cardSwiper2", {
 });
 
 
+
 });
+
 
 

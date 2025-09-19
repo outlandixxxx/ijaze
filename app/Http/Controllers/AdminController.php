@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Post;
+use App\Models\Media;
 use Illuminate\Support\Str;
 
 class AdminController extends Controller
@@ -77,56 +79,57 @@ class AdminController extends Controller
     }
 
 
-    public function storepost(Request $request) {
+    public function storePost(Request $request)
+{
+    $validated = $request->validate([
+        'category_id' => 'required|exists:categories,id',
+        'title'       => 'required|string|max:255',
+        'slug'        => 'nullable|string|unique:posts,slug|max:255',
+        'description' => 'required|string|max:500',
+        'content'     => 'required|string',
+        'media_type'  => 'required|in:image,video',
+        'video_url'   => 'nullable|url',
+        'media_file'  => 'nullable|file|mimes:jpg,jpeg,png,gif,webp,mp4|max:20480', // 20MB
+    ]);
 
-        $validated = $request->validate([
-            'category_id' => 'required|exists:categories,id',
-            'title' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:posts,slug',
-            'description' => 'required|string|max:500',
-            'content' => 'required|string',
-            'media_type' => 'required|in:image,video',
-            'media_file' => 'required_if:media_type,image|file|mimes:jpg,jpeg,png,gif|max:2048',
-            'video_url' => 'required_if:media_type,video|url',
-        ]);
-
-        if (!$validated['slug']) {
-            $validated['slug'] = Str::slug($validated['title']);
-        }
-
-        // Create post
-        $post = Post::create([
-            'category_id' => $validated['category_id'],
-            'title' => $validated['title'],
-            'slug' => $validated['slug'],
-            'description' => $validated['description'],
-            'content' => $validated['content'],
-        ]);
-
-        // Handle media
-        if ($validated['media_type'] === 'image' && $request->hasFile('media_file')) {
-            $path = $request->file('media_file')->store('posts', 'public');
-            Media::create([
-                'post_id' => $post->id,
-                'type' => 'image',
-                'file_path' => $path,
-            ]);
-        } elseif ($validated['media_type'] === 'video') {
-            // Extract YouTube ID from URL
-            preg_match("/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^\&\?\/]+)/", $validated['video_url'], $matches);
-            $video_id = $matches[1] ?? null;
-
-            Media::create([
-                'post_id' => $post->id,
-                'type' => 'video',
-                'file_path' => $video_id,
-                'thumbnail' => "https://img.youtube.com/vi/{$video_id}/hqdefault.jpg",
-            ]);
-        }
-
-        return redirect()->route('createpost')->with('success', 'Post created successfully!');
-
+    // Auto slug if empty
+    if (!$validated['slug']) {
+        $validated['slug'] = Str::slug($validated['title']);
     }
+
+    // Create the post
+    $post = Post::create([
+        'category_id' => $validated['category_id'],
+        'title'       => $validated['title'],
+        'slug'        => $validated['slug'],
+        'description' => $validated['description'],
+        'content'     => $validated['content'],
+    ]);
+
+    // Handle media
+    if ($validated['media_type'] === 'image' && $request->hasFile('media_file')) {
+        $path = $request->file('media_file')->store('uploads/posts', 'public');
+
+        Media::create([
+            'post_id'   => $post->id,
+            'type'      => 'image',
+            'file_path' => $path,
+        ]);
+    }
+
+    if ($validated['media_type'] === 'video' && $validated['video_url']) {
+        Media::create([
+            'post_id'   => $post->id,
+            'type'      => 'video',
+            'file_path' => $validated['video_url'], // store YouTube link instead of file
+            'thumbnail' => null, // you can later fetch from YouTube API
+        ]);
+    }
+
+    return redirect()
+        ->route('createpost')
+        ->with('success', 'Post created successfully!');
+}
 
     public function updatepost() {
 
@@ -135,4 +138,9 @@ class AdminController extends Controller
     public function deletepost() {
 
     }
+
+    public function test() {
+return view ('test');
+    }
+
 }

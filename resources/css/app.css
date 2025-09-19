@@ -2,6 +2,7 @@
 @import "bootstrap-icons/font/bootstrap-icons.css";
 @import "./footer.css";
 @import "./bnews.css";
+
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
@@ -15,10 +16,15 @@
 body {
   background-color: #121212;
   color: white;
+  font-family: "Noto Sans Arabic", sans-serif;
+  font-optical-sizing: auto;
 }
 
 h1, h2, h3 {
-  color: #99E39E;
+  color: #FBC550;
+  font-family: "Noto Sans Arabic", sans-serif;
+  font-optical-sizing: auto;
+
 }
 
 .navbar-custom {
@@ -26,6 +32,15 @@ h1, h2, h3 {
   z-index: 40;
   height: 5.2rem;
 }
+
+.noto-sans-arabic{
+    font-family: "Noto Sans Arabic", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+  }
 
 /* Carousel */
 .carousel-item img {
@@ -37,7 +52,7 @@ h1, h2, h3 {
 /* Navbar toggler (hamburger) fix */
 .navbar-toggler {
   border-color: rgb(255, 255, 255);
-  color: #00ff7f;
+  color: #FBC550;
 }
 
 .navbar-toggler-icon {
@@ -101,7 +116,7 @@ margin-top: 6rem;
 
 .swiper-button-next,
 .swiper-button-prev {
-    color: #fff;      /* Arrow color */
+    color: #fbc550 !important;      /* Arrow color */
     z-index: 20;      /* Above cards */
 }
 
@@ -116,7 +131,11 @@ margin-top: 6rem;
 .swiper-pagination {
     bottom: 10px;
     z-index: 20;
+    color: rgb(225, 125, 44);
 }
+
+
+
 
 .card video {
     object-fit: cover; /* ensures video fills the frame */
@@ -181,3 +200,89 @@ margin-top: 6rem;
     }
 }
 
+.carousel .card {
+    background: transparent !important; /* remove default card background */
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+  }
+
+  .carousel .card:hover {
+    transform: scale(1.03);
+  }
+
+  .carousel .card img {
+    height: 280px; /* adjust as needed */
+    object-fit: cover;
+  }
+
+  .carousel .card-img-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+  }
+
+  .carousel .card h5 {
+    font-size: 1rem;
+  }
+
+
+  /*custtom cards*/
+
+  .custom-card {
+    position: relative; /* necessary for overlay positioning */
+    border: none;
+    border-radius: 0;
+    overflow: hidden;
+    height: 280px; /* make card same height as image */
+}
+
+.custom-card-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* fill the card */
+    background-size: cover;
+    background-position: center;
+}
+
+.custom-card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px; /* adjust overlay height */
+    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+    display: flex;
+    align-items: flex-end;
+}
+
+.custom-card-overlay h5 {
+    margin: 0;
+}
+
+.video-wrapper {
+    display: flex;
+    justify-content: center; /* center vertical videos */
+    width: 100%;
+    max-width: 912px; /* max width for normal videos */
+    margin: 0 auto;
+    background: #000; /* optional black background for vertical videos */
+}
+
+.video-wrapper iframe {
+    width: 100%;
+    height: calc(100vw * 9 / 16); /* default for horizontal 16:9 videos */
+    max-height: 513px; /* max height for large screens */
+    aspect-ratio: auto; /* preserve vertical videos */
+    object-fit: contain; /* prevents cropping */
+}
+
+/* Optional: for very narrow vertical videos */
+@media (max-aspect-ratio: 9/16) {
+    .video-wrapper iframe {
+        width: auto;
+        height: 513px; /* fix height for vertical video */
+    }
+}

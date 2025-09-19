@@ -7,7 +7,7 @@
             <div class="col-sm-12">
                 <div class="card text-white text-end  bg-transparent">
                     <div class="card-body" style="background-color: #171616 ;border-radius: 30px;">
-                        <h3 class="card-title mb-3" style="color: #ad9884;"> مشاهير <i class="fa-solid fa-people-group fa-xl"></i>
+                        <h3 class="card-title mb-3" style="color: #ffdc91;"> مشاهير <i class="fa-solid fa-people-group fa-xl"></i>
                         </h3>
 
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-6 g-2 mt-3 justify-content-end card-container"
@@ -41,7 +41,7 @@
             <div class="col-sm-12">
                 <div class="card text-white text-end  bg-transparent">
                     <div class="card-body" style="background-color: #171616 ;border-radius: 30px;">
-                        <h3 class="card-title mb-3" style="color: #ad9884;"> حياتي <i class="fa-solid fa-people-group fa-xl"></i>
+                        <h3 class="card-title mb-3" style="color: #ffdc91;"> حياتي <i class="fa-solid fa-people-group fa-xl"></i>
                         </h3>
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-6 g-2 mt-3 justify-content-end card-container"
                             >
@@ -73,7 +73,7 @@
             <div class="col-sm-12">
                 <div class="card text-white text-end  bg-transparent">
                     <div class="card-body" style="background-color: #171616 ;border-radius: 30px;">
-                        <h3 class="card-title mb-3" style="color: #ad9884;"> مغربي <i class="fa-solid fa-people-group fa-xl"></i>
+                        <h3 class="card-title mb-3" style="color: #ffdc91;"> مغربي <i class="fa-solid fa-people-group fa-xl"></i>
                         </h3>
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-6 g-2 mt-3 justify-content-end card-container"
                             >
@@ -105,7 +105,7 @@
                 <div class="col-sm-12">
                     <div class="card text-white text-end  bg-transparent">
                         <div class="card-body" style="background-color: #171616 ;border-radius: 30px;">
-                            <h3 class="card-title mb-3" style="color: #ad9884;"> صحتي <i class="fa-solid fa-heart-pulse fa-xl"></i></i>
+                            <h3 class="card-title mb-3" style="color: #ffdc91;"> صحتي <i class="fa-solid fa-heart-pulse fa-xl"></i></i>
                             </h3>
 
                             <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-6 g-2 mt-3 justify-content-end card-container"

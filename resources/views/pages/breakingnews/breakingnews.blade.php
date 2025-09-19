@@ -39,21 +39,24 @@
             <div class="col-sm-12">
                 <div class="card text-white text-end  bg-transparent">
                     <div class="card-body" style="background-color: #171616 ;border-radius: 30px;">
-                       
+
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-6 g-2 mt-3 justify-content-end card-container"
                             >
 
                             <!-- Example with more than 10 items -->
                             @for ($i = 1; $i <= 30; $i++)
-                                <div class="col card-item d-none">
+                            <div class="col card-item d-none">
+                                <a href="{{ 'imagenews' }}" class="text-decoration-none">
                                     <div class="card bg-dark text-white card-equal">
-                                        <img src="https://picsum.photos/600/400?random=1" class="card-img" alt="...">
+                                        <img src="https://assets.kooora.com/images/v3/getty-2231158186/crop/MM5DGMZRGI5DCOBWGM5G433XMU5DENZZHIZQ====/GettyImages-2231158186.jpg?quality=60&auto=webp&format=pjpg&width=980"
+                                             class="card-img" alt="...">
                                         <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                            <h5 class="card-title">Card title 1</h5>
-                                            <p class="card-text">This is a wider card with supporting text.</p>
+                                            <h5 class="card-title text-white">"الانضباط" تسدل الستار على ملف عقوبة هويسين</h5>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
+                            </div>
+
                             @endfor
                         </div>
 
