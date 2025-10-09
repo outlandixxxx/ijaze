@@ -1,160 +1,260 @@
 @extends('layouts.app')
+
 @section('content')
-    <div class="container mt-11 text-end">
-        <div class="row text-end mx-auto">
+    <div class="container-fluid mt-11">
 
-            <!-- Left sidebar: Social share -->
-            <div class="col-12 col-md-2 mb-3 d-flex flex-column align-items-center justify-content-start">
-                <h6 class="mb-3">شارك</h6>
-                <ul class="list-unstyled d-flex flex-md-column gap-4 gap-md-3">
-                    <li>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}"
-                            target="_blank" class="text-decoration-none text-primary">
-                            <i class="fa-brands fa-square-facebook fa-2xl"></i>
+        <div>
+            @forelse ($allposts as $post)
+                @php $media = $post->media->first(); @endphp
+                @if ($media && $media->type === 'image')
+                    <div class="col card-item d-none">
+                        <a href="{{ route('article', $post->slug) }}" class="text-decoration-none">
+                            <div class="card bg-dark text-white card-amusing card-hover card-equal">
+                                <img src="{{ $media->path ? asset('storage/' . $media->path) : asset('storage/' . $media->thumbnail) }}"
+                                    class="card-img" alt="{{ $post->title }}">
+                                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                    <h5 class="card-title">{{ $post->title }}</h5>
+                                    <p class="card-text">{{ Str::limit($post->content, 60) }}</p>
+                                </div>
+                            </div>
                         </a>
-                    </li>
-                    <li>
-                        <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}" target="_blank"
-                            class="text-decoration-none text-white">
-                            <i class="fa-brands fa-square-x-twitter fa-2xl"></i> </a>
-                    </li>
-                    <li>
-                        <a href="https://api.whatsapp.com/send?text={{ urlencode(request()->fullUrl()) }}" target="_blank"
-                            class="text-decoration-none text-success">
-                            <i class="fa-brands fa-square-whatsapp fa-2xl"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(request()->fullUrl()) }}"
-                            target="_blank" class="text-decoration-none text-primary">
-                            <i class="fa-brands fa-square-linkedin fa-2xl"></i> </a>
-                    </li>
-
-                    <li>
-                        <a href="javascript:void(0);" onclick="copyPageLink()" class="text-decoration-none text-white"
-                            title="نسخ الرابط">
-                            <i class="fa-solid fa-link fa-2xl"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Last news sidebar -->
-            <div class="col-12 col-md-3 mb-3">
-                <h5>أخبار سابقة</h5>
-                <div class="border-top pt-2">
-                    <ul class="list-unstyled">
-                        @for ($i = 1; $i <= 10; $i++)
-                            <li class="mb-2">
-                                <a href="#"
-                                    class="d-flex justify-content-end align-items-center gap-2 flex-nowrap text-decoration-none text-white">
-                                    <h4 class="mb-0 fs-6 text-truncate" style="max-width: 200px;">
-                                        عنوان الخبر {{ $i }}
-                                    </h4>
-                                    <span class="fs-6" style="white-space: nowrap;">12-10-2025</span>
-                                </a>
-                            </li>
-                        @endfor
-                    </ul>
-                </div>
-
-                <h5>صوت و صورة</h5>
-                <div class="border-top pt-2">
-                    <ul class="list-unstyled d-flex flex-column gap-2 text-end">
-                        @for ($i = 1; $i <= 6; $i++)
-                            <li>
-                                <a href="#" class="text-decoration-none d-block">
-                                    <div class="position-relative overflow-hidden rounded ms-auto"
-                                        style="width: 200px; transition: transform 0.3s;">
-                                        <!-- Video thumbnail -->
-                                        <img src="{{ asset('images/videos/video' . $i . '.png') }}" class="img-fluid"
-                                            alt="Video {{ $i }}">
-
-                                        <!-- Overlay title -->
-                                        <div
-                                            class="position-absolute bottom-0 start-50 translate-middle-x w-100 p-1 text-white bg-dark bg-opacity-50 text-center transition-hover">
-                                            فيديو {{ $i }}
-                                        </div>
-
-                                        <!-- Play button -->
-                                        <div class="position-absolute top-0 start-0 m-2 text-white">
-                                            <i class="fa-solid fa-circle-play fa-2xl"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        @endfor
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Main news -->
-            <div class="col-12 col-md-7">
-                <h3 class="mb-3">الخبر الأول</h3>
-
-
-                    <!-- Image -->
-                    <div class="text-center">
-                        <img src="{{ asset('images/carousel/3.jpg') }}" class="rounded img-thumbnail img-fluid"
-                            alt="الخبر الأول">
                     </div>
-
-                    <div class="mb-3  text-start">
-                        <span class="badge text-secondary me-1">بقلم نخنى يؤؤؤ</span>
-                    </div>
-
-
-                <!-- YouTube Video -->
-
-
-
-                {{-- <div class="video-wrapper mb-3">
-                    <iframe src="https://www.youtube.com/embed/zL2v8KRd908" title="YouTube Video" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-                </div> --}}
-                <div class=" mb-3 " style="display:flex; justify-content:center;">
-                    <iframe width="356" height="633"
-        src="https://www.youtube.com/embed/UJKDnn9qOGY?autoplay=1&mute=1"
-        title="ريانير تنسحب من إسبانيا وتضاعف استثماراتها بالمغرب" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-                {{--  @endif --}}
-
-                <!-- Content -->
-                <div class="mb-3">
-                    <p>ضت المحكمة الدستورية بإلغاء انتخاب الطاهر الفلالي عضوًا بمجلس المستشارين عن الهيئة الناخبة لممثلي
-                        الغرف الفلاحية بجهات الرباط ــ سلا ــ القنيطرة وبني ملال ــ خنيفرة والدار البيضاء ــ سطات، بموجب
-                        الانتخاب الجزئي الذي أُجري في فاتح يوليوز الماضي.</p>
-                    <p>نَت المحكمة قرارها رقم 258/25 على عريضة مسجلة بأمانتها العامة بتاريخ الرابع عشر من يوليوز الماضي،
-                        قدّمها والي جهة بني ملال ــ خنيفرة عامل عمالة إقليم بني ملال، بصفته هاته، طالبًا فيها التصريح
-                        ببطلان نتيجة الانتخاب الجزئي المذكور.</p>
-                    <p>بيّنت المحكمة ذاتها أن الحكم الابتدائي الصادر عن المحكمة الابتدائية ببني ملال، الذي سبق أن ألغى
-                        قرار رفض ترشيح المعني بالأمر، خالف مقتضيات المادة 24 من القانون التنظيمي رقم 28.11 المتعلق بمجلس
-                        المستشارين.
-
-                        كما شدّدت “الدستورية” على أن صفة الناخب، باعتبارها شرطًا جوهريًا للترشح، لا تُستمدّ إلا من
-                        التسجيل القانوني في اللوائح الانتخابية العامة، وفق المقتضيات القانونية ذات الصلة، لا سيما
-                        القانون التنظيمي رقم 28.11 المذكور والقانون رقم57.11 المتعلق باللوائح الانتخابية العامة، اللذين
-                        يؤطّران عملية التسجيل وشروطها بدقة ويربطانها مبدئيا بالإقامة الفعلية وبالبطاقة الوطنية.
-
-                        وأمرت المحكمة، على ضوء هذه المعطيات، بتبليغ قرارها إلى كل من رئيس مجلس المستشارين والسلطة
-                        الإدارية التي تلقت الترشيحات بالدائرة الانتخابية لجهات الرباط ــ سلا ــ القنيطرة وبني ملال ــ
-                        خنيفرة والدار البيضاء ــ سطات، وبنشره في الجريدة الرسمية.
-
-                        كما دعت إلى إجراء انتخابات جزئية لشغل المقعد الشاغر استنادًا إلى مقتضيات المادة 92 من القانون
-                        التنظيمي رقم 28.11 الخاص بمجلس المستشارين.</p>
-                </div>
-
-                <!-- Tags / Categories -->
-                <div class="mb-3 text-end">
-                    <span class="badge bg-light me-1 text-dark">رياضة</span>
-                    <span class="badge bg-light me-1 text-dark">سياسة</span>
-                    <span class="badge bg-light text-dark">ثقافة</span>
-                </div>
-            </div>
-
+                @endif
+            @empty
+                <p class="text-muted">لا توجد مقالات</p>
+            @endforelse
         </div>
-    </div>
-@endsection
+        <!-- Custom Tabs Navigation -->
+        <div class="custom-tabs-container mt-4">
+            <ul class="custom-tabs" style="z-index: 99;">
+                <li class="custom-tab-item active" data-target="news">
+                    <a href="javascript:void(0)">اخبار</a>
+                </li>
+                <li class="custom-tab-item" data-target="order">
+                    <a href="javascript:void(0)">ترتيب الدوريات</a>
+                </li>
+                <li class="custom-tab-item" data-target="match">
+                    <a href="javascript:void(0)">مباريات اليوم</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="custom-tab-content">
+
+            <!-- NEWS TAB -->
+            <div class="tab-pane active" id="news">
+
+                <h4 class="m-5 text-end">اخر الأخبار</h4>
+
+
+                <div class="row g-3">
+
+                    <!-- LEFT SIDE (first 4 posts stacked) -->
+                    <div class="col-md-6 d-flex flex-column">
+                        @foreach ($others->take(4) as $post)
+                            <a href="{{ route('article', $post->slug) }}" class="text-decoration-none">
+                                <div class="card text-white text-end bg-transparent mb-3 flex-fill"
+                                    style="min-height:120px;">
+                                    <div class="card-body d-flex align-items-center justify-content-between"
+                                        style="background-color: #171616; border-radius: 20px;">
+
+                                        {{-- Text on the left --}}
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="card-title mb-2" style="color: #ffdc91;">
+                                                {{ $post->title }}
+                                                <i class="fa-solid fa-people-group fa-sm"></i>
+                                            </h6>
+                                            <p class="card-text text-muted small mb-0">
+                                                {{ Str::limit($post->description, 60, '...') }}
+                                            </p>
+                                        </div>
+
+                                        {{-- Image on the right --}}
+                                        @if ($post->media->isNotEmpty())
+                                            <div style="flex:0 0 120px;">
+                                                <img src="{{ asset('storage/' . ($post->media->first()->thumbnail ?? $post->media->first()->path)) }}"
+                                                    class="img-fluid rounded" alt="{{ $post->title }}"
+                                                    style="width:120px; height:80px; object-fit:cover;">
+                                            </div>
+                                        @endif
+
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+
+
+                    <!-- RIGHT SIDE (featured post) -->
+                    <div class="col-md-6 d-flex">
+                        <a href="{{ route('article', $featured->slug) }}" class="text-decoration-none w-100">
+                            <div class="card text-white text-end bg-transparent w-100" style="height:660px;">
+                                <!-- 160px * 4 + margins ≈ 660px -->
+                                <div class="card-body h-100" style="background-color: #171616; border-radius: 20px;">
+                                    <h2 class="card-title" style="color: #ffdc91;">
+                                        {{ $featured->title }}
+                                        <i class="fa-solid fa-people-group fa-xl"></i>
+                                    </h2>
+
+                                    @if ($featured->media->isNotEmpty())
+                                        <img src="{{ asset('storage/' . ($post->media->first()->thumbnail ?? $post->media->first()->path)) }}"
+                                            class="card-image rounded w-100 h-100" alt="{{ $featured->title }}">
+                                    @endif
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SECOND ROW (next 4 posts) -->
+                <div class="row g-3 mt-3">
+                    @foreach ($others->skip(4)->take(4) as $post)
+                        <div class="col-md-3">
+                            <a href="{{ route('article', $post->slug) }}" class="text-decoration-none">
+                                <div class="card text-white text-end bg-transparent h-100" style="min-height:200px;">
+                                    <div class="card-body" style="background-color: #171616; border-radius: 20px;">
+                                        <h5 class="card-title mb-2" style="color: #ffdc91;">
+                                            {{ $post->title }}
+                                            <i class="fa-solid fa-people-group fa-lg"></i>
+                                        </h5>
+                                        @if ($post->media->isNotEmpty())
+                                            <img src="{{ asset('storage/' . ($post->media->first()->thumbnail ?? $post->media->first()->path)) }}"
+                                                class="img-fluid rounded mt-2 w-100" alt="{{ $post->title }}"
+                                                style="max-height:120px; object-fit:cover;">
+                                        @endif
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+
+                <div class="row p-4">
+                    <div class="col-sm-12">
+                        <div class="card text-white text-end  bg-transparent">
+                            <div class="card-body" style="background-color: #171616 ;border-radius: 30px;">
+                                <h2 class="card-title mb-3" style="color: #ffdc91;"> جميع المقالات <i
+                                        class="fa-solid fa-heart-pulse fa-xl"></i></i>
+                                </h2>
+
+                                {{-- ================= IMAGE POSTS ================= --}}
+                                <h4 class="m-5 text-end">صور</h4>
+                                <div
+                                    class="row row-cols-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-6 g-2 mt-3 justify-content-end card-container">
+
+                                    @forelse ($allposts as $post)
+                                        @php $media = $post->media->first(); @endphp
+                                        @if ($media && $media->type === 'image')
+                                            <div class="col card-item d-none">
+                                                <a href="{{ route('article', $post->slug) }}" class="text-decoration-none">
+                                                    <div class="card bg-dark text-white card-amusing card-hover card-equal">
+                                                        <img src="{{ $media->path ? asset('storage/' . $media->path) : asset('storage/' . $media->thumbnail) }}"
+                                                            class="card-img" alt="{{ $post->title }}">
+                                                        <div
+                                                            class="card-img-overlay d-flex flex-column justify-content-end">
+                                                            <h5 class="card-title">{{ $post->title }}</h5>
+                                                            <p class="card-text">{{ Str::limit($post->content, 60) }}</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @empty
+                                        <p class="text-muted">لا توجد مقالات</p>
+                                    @endforelse
+
+
+
+                                    <div class="text-center mt-3">
+                                        <button class="btn btn-dark px-4 show-more-btn">عرض المزيد</button>
+                                    </div>
+                                </div>
+
+                                {{-- ================= VIDEO POSTS ================= --}}
+                                <h4 class="m-5 text-end">فيديوهات</h4>
+                                <div
+                                    class="row row-cols-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-6 g-2 mt-3 justify-content-end card-container">
+                                    @forelse ($allposts as $post)
+                                        @php $media = $post->media->first(); @endphp
+                                        @if ($media && in_array(strtolower($media->type), ['aivideo', 'videotube']))
+                                            <div class="col card-item d-none">
+                                                <a href="{{ route('article', $post->slug) }}"
+                                                    class="text-decoration-none">
+                                                    <div
+                                                        class="card bg-dark text-white card-amusing card-hover card-equal">
+                                                        <img src="{{ asset('storage/' . $media->thumbnail) }}"
+                                                            class="card-img" alt="{{ $post->title }}">
+                                                        <div
+                                                            class="card-img-overlay d-flex flex-column justify-content-end">
+                                                            <h5 class="card-title">{{ $post->title }}</h5>
+                                                            <p class="card-text">{{ Str::limit($post->content, 60) }}</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @empty
+                                        <p class="text-muted">لا توجد مقالات</p>
+                                    @endforelse
+
+                                    <div class="text-center mt-3">
+                                        <button class="btn btn-dark px-4 show-more-btn">عرض المزيد</button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- END NEWS -->
+
+                <!-- ORDER TAB -->
+                <div class="tab-pane" id="order">
+                    <h4 class="m-5 text-end">ترتيب الدوريات</h4>
+                    <div
+                        class="row row-cols-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-6 g-2 mt-3 justify-content-end card-container">
+                        @for ($i = 1; $i <= 30; $i++)
+                            <a href="{{ 'imagenews' }}" class="text-decoration-none">
+                                <div class="card text-white text-end bg-transparent h-100">
+                                    <div class="card-body" style="background-color: #171616; border-radius: 20px;">
+                                        <h2 class="card-title mb-3" style="color: #ffdc91;">
+                                            Card A <i class="fa-solid fa-people-group fa-xl"></i>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </a>
+                        @endfor
+                        <div class="text-center mt-3">
+                            <button class="btn btn-dark px-4 show-more-btn">عرض المزيد</button>
+                        </div>
+                    </div>
+                </div> <!-- END ORDER -->
+
+                <!-- MATCH TAB -->
+                <div class="tab-pane" id="match">
+                    <h4 class="m-5 text-end">مباريات</h4>
+                    <div
+                        class="row row-cols-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-6 g-2 mt-3 justify-content-end card-container">
+                        @for ($i = 1; $i <= 30; $i++)
+                            <a href="{{ 'imagenews' }}" class="text-decoration-none">
+                                <div class="card text-white text-end bg-transparent h-100">
+                                    <div class="card-body" style="background-color: #171616; border-radius: 20px;">
+                                        <h2 class="card-title mb-3" style="color: #ffdc91;">
+                                            Card A <i class="fa-solid fa-people-group fa-xl"></i>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </a>
+                        @endfor
+                        <div class="text-center mt-3">
+                            <button class="btn btn-dark px-4 show-more-btn">عرض المزيد</button>
+                        </div>
+                    </div>
+                </div> <!-- END MATCH -->
+
+            </div> <!-- END TAB CONTENT -->
+        </div>
+    @endsection

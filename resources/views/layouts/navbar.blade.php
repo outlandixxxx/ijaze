@@ -2,24 +2,47 @@
     <!-- Large screens navbar (centered) -->
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-custom fixed-top d-none d-lg-flex">
         <div class="container-fluid">
+            
             <div class="collapse navbar-collapse justify-content-center">
+
                 <ul class="navbar-nav gap-3 text-center">
-                    <li class="nav-item"><a class="btn btn-outline-light noto-sans-arabic  px-3"
-                            href="{{ '/' }}#amusing">منوعات</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-light noto-sans-arabic px-3"
-                            href="{{ '/' }}#ai"> AI بالـ </a></li>
-                    <li class="nav-item"><a class="btn btn-outline-light noto-sans-arabic px-3"
-                            href="{{ '/' }}#sport">رياضة</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-light noto-sans-arabic px-3"
-                            href="{{ '/' }}#trending">شاهد</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-light noto-sans-arabic px-3"
-                            href="{{ '/' }}#breakingnews">أخبار </a></li>
-                    <li class="nav-item " aria-current="page"><a class="btn btn-outline-light noto-sans-arabic active px-3 "
-                            href="{{ '/' }}#index">الرئيسية</a></li>
+            
+                    
+
+<li class="nav-item">
+    <a class="btn btn-outline-light noto-sans-arabic px-3 {{ request()->is('amusing') ? 'active' : '' }}"
+       href="{{ url('/') }}#amusing">منوعات</a>
+</li>
+
+<li class="nav-item">
+    <a class="btn btn-outline-light noto-sans-arabic px-3 {{ request()->is('ai') ? 'active' : '' }}"
+       href="{{ url('/') }}#ai">AI بالـ</a>
+</li>
+
+<li class="nav-item">
+    <a class="btn btn-outline-light noto-sans-arabic px-3 {{ request()->is('sport') ? 'active' : '' }}"
+       href="{{ url('/') }}#sport">رياضة</a>
+</li>
+
+<li class="nav-item">
+    <a class="btn btn-outline-light noto-sans-arabic px-3 {{ request()->is('shahid') ? 'active' : '' }}"
+       href="{{ url('/') }}#shahid">شاهد</a>
+</li>
+
+<li class="nav-item">
+    <a class="btn btn-outline-light noto-sans-arabic px-3 {{ request()->is('news') ? 'active' : '' }}"
+       href="{{ url('/') }}#news">أخبار</a>
+</li>
+<li class="nav-item">
+    <a class="btn btn-outline-light noto-sans-arabic px-3 {{ request()->is('/') ? 'active' : '' }}"
+       href="{{ url('/') }}#index">الرئيسية</a>
+</li>
+
+
                 </ul>
             </div>
-            <a class="navbar-brand ms-auto" href="#"><img src="{{ asset('images/logo.png') }}" alt="Bootstrap"
-                    width="200" height="80"></a>
+            <a class="navbar-brand ms-auto" href="/"><img src="{{ asset('images/logo.png') }}" alt="Bootstrap"
+                    width="80" height="45"></a>
         </div>
     </nav>
 

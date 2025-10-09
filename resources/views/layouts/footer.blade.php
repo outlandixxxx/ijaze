@@ -126,10 +126,40 @@
                 </div>
                 <p>
 توصل بابرز تحديثاتنا و عروصنا من خلال مشاركتم                </p>
-                <form action="#" class="dk-footer-form d-flex">
-                    <input type="email" class="form-control me-2" placeholder="Email Address">
-                    <button type="submit"><i class="fa-solid fa-paper-plane fa-2xl" style="color: #0d392c;"></i></button>
-                </form>
+<form id="subscribe-form" class="dk-footer-form d-flex">
+    @csrf
+    <input type="email" name="email" class="form-control me-2" placeholder="Email Address" required>
+    <button type="submit">
+        <i class="fa-solid fa-paper-plane fa-2xl" style="color: #0d392c;"></i>
+    </button>
+</form>
+
+<div id="subscribe-message"></div>
+
+<script>
+document.getElementById('subscribe-form').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    fetch('{{ route("subscribe") }}', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        const msgDiv = document.getElementById('subscribe-message');
+        if(data.success){
+            msgDiv.innerHTML = `<p class="text-success mt-2">${data.success}</p>`;
+        } else if(data.errors){
+            msgDiv.innerHTML = `<p class="text-danger mt-2">${data.errors.email}</p>`;
+        }
+    })
+    .catch(err => console.error(err));
+});
+</script>
+
+
             </div>
 
             <div class="copyright mt-3 text-start text-lg-start">

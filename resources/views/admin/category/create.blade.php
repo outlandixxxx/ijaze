@@ -32,7 +32,7 @@
                             <!-- Category Name -->
                             <div class="col-md-6 mb-3">
                                 <label for="name" class="form-label">Category Name</label>
-                                <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
+                                <input type="text" name="name" id="name" class="form-control">
                                 @error('name')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -41,29 +41,13 @@
                             <!-- Slug -->
                             <div class="col-md-6 mb-3">
                                 <label for="slug" class="form-label">Slug (optional)</label>
-                                <input type="text" name="slug" id="slug" class="form-control" value="{{ old('slug') }}">
+                                <input type="text" name="slug" id="slug" class="form-control" >
                                 @error('slug')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
 
-                            <!-- Parent Category -->
-                            <div class="col-md-12 mb-3">
-                                <div class="input-group">
-                                    <label class="input-group-text" for="parent_id">Parent Category</label>
-                                    <select name="parent_id" class="form-select" id="parent_id">
-                                        <option value="">-- None --</option>
-                                        @foreach($categories as $category)
-                                            <option value="{{ $category->id }}" {{ old('parent_id') == $category->id ? 'selected' : '' }}>
-                                                {{ $category->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                @error('parent_id')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
+                           
 
                         </div>
 
