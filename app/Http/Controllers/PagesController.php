@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\View;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
@@ -263,7 +265,7 @@ return view('pages.ai.ai', compact('tabPosts'));
 
 
 
-public function article($slug)
+/* public function article($slug)
 {
     $post = Post::with('media', 'tags', 'categories')
         ->where('slug', $slug)
@@ -299,8 +301,60 @@ public function article($slug)
         ->get();
 
     return view('pages.post', compact('post', 'previousImages', 'previousVideos', 'relatedPosts'));
-}
+} */
 
+
+    public function article($slug)
+{
+    $post = Post::with('media', 'tags', 'categories')
+        ->where('slug', $slug)
+        ->firstOrFail();
+
+    // ✅ Track unique view
+    $userId = Auth::id();
+    $ip = request()->ip();
+
+    $alreadyViewed = View::where('post_id', $post->id)
+        ->when($userId, fn($q) => $q->where('user_id', $userId))
+        ->when(!$userId, fn($q) => $q->where('ip_address', $ip))
+        ->where('created_at', '>', now()->subHours(6)) // optional: count again after 6 hours
+        ->exists();
+
+    if (!$alreadyViewed) {
+        View::create([
+            'post_id' => $post->id,
+            'user_id' => $userId,
+            'ip_address' => $ip,
+        ]);
+
+       
+    }
+
+    // previous posts (image type)
+    $previousImages = Post::with('media')
+        ->whereHas('media', fn($q) => $q->where('type', 'image'))
+        ->where('id', '<', $post->id)
+        ->latest()
+        ->take(10)
+        ->get();
+
+    // previous posts (video type)
+    $previousVideos = Post::with('media')
+        ->whereHas('media', fn($q) => $q->whereIn('type', ['videotube', 'aivideo']))
+        ->where('id', '<', $post->id)
+        ->latest()
+        ->take(10)
+        ->get();
+
+    // related posts (same tags)
+    $relatedPosts = Post::with('media')
+        ->whereHas('tags', fn($q) => $q->whereIn('tags.id', $post->tags->pluck('id')))
+        ->where('id', '!=', $post->id)
+        ->take(8)
+        ->get();
+
+    return view('pages.post', compact('post', 'previousImages', 'previousVideos', 'relatedPosts'));
+}
 
     public function tag($name)
     {

@@ -1,17 +1,15 @@
-@extends('layouts.admin')
+@extends('admin.admin')
 
 @section('content')
-<div class="container mt-11">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="container-fluid d-flex justify-content-center align-items-center min-vh-100">
 
-            <div class="card shadow-sm">
-                <div class="card-header bg-dark text-white">
-                    <h4 class="mb-0">Create Category</h4>
-                </div>
+<div class="card shadow-lg p-4" style="width: 100%; max-width: 900px;">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">Create Category</h3>
+        <a href="{{ route('showcategory') }}" class="btn btn-sm btn-dark">Return</a>
+    </div>
 
-                <div class="card-body">
-                    @if(session('success'))
+    @if(session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
 
@@ -24,6 +22,8 @@
                             </ul>
                         </div>
                     @endif
+
+
 
                     <form action="{{ route('storecategory') }}" method="POST">
                         @csrf
@@ -51,7 +51,7 @@
 
                         </div>
 
-                        <button type="submit" class="btn btn-dark mt-3">Create Category</button>
+                        <button type="submit" class="btn btn-sm btn-success mt-3">Save</button>
                     </form>
                 </div>
             </div>

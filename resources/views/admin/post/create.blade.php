@@ -1,133 +1,143 @@
-@extends('layouts.admin')
+@extends('admin.admin')
 
 @section('content')
-<div class="container mt-11">
+<div class="container m-5">
+
     <div class="card p-4">
-        <h3 class="mb-3">Create Post</h3>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">Create Post</h3>
+        <a href="{{ route('showpost') }}" class="btn btn-sm btn-dark">Return</a>
+    </div>
 
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
+    @if(session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
 
-        <form action="{{ route('storepost') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="row">
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach($errors->all() as $error)
+                                  <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
-                <!-- Categories + Subcategories -->
-                <div class="col-12 mb-3">
-                    <label>Categories & Subcategories</label>
-                    <div id="category-wrapper">
-                        @foreach(old('categories', []) as $index => $cat)
-                            <div class="row mb-2 category-row">
-                                <div class="col-md-5">
-                                    <select name="categories[{{ $index }}][id]" class="form-select">
-                                        <option value="">Select Category</option>
-                                        @foreach($categories as $category)
-                                            <option value="{{ $category->id }}" {{ ($cat['id'] ?? '') == $category->id ? 'selected' : '' }}>
-                                                {{ $category->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-5">
-                                    <select name="categories[{{ $index }}][subcategories][]" class="form-select" multiple>
-                                        @foreach($subcategories as $subcategory)
-                                            <option value="{{ $subcategory->id }}" 
-                                                @if(isset($cat['subcategories']) && in_array($subcategory->id, $cat['subcategories'])) selected @endif>
-                                                {{ $subcategory->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-danger remove-category">Remove</button>
-                                </div>
+
+    <form action="{{ route('storepost') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="row">
+
+            <!-- Categories + Subcategories -->
+            <div class="col-12 mb-3">
+                <label>Categories & Subcategories</label>
+                <div id="category-wrapper">
+                    @foreach(old('categories', []) as $index => $cat)
+                        <div class="row mb-2 category-row">
+                            <div class="col-md-5">
+                                <select name="categories[{{ $index }}][id]" class="form-select">
+                                    <option value="">Select Category</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" {{ ($cat['id'] ?? '') == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
-                        @endforeach
-                    </div>
-                    <button type="button" class="btn btn-primary" id="add-category">Add Category</button>
-                </div>
-
-                <!-- Title -->
-                <div class="col-md-6 mb-3">
-                    <label>Title</label>
-                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
-                           value="{{ old('title') }}">
-                    @error('title') <small class="text-danger">{{ $message }}</small> @enderror
-                </div>
-
-                <!-- Slug -->
-                <div class="col-md-6 mb-3">
-                    <label>Slug</label>
-                    <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror"
-                           value="{{ old('slug') }}">
-                    @error('slug') <small class="text-danger">{{ $message }}</small> @enderror
-                </div>
-
-                <!-- Tags -->
-                <div class="col-6 mb-3">
-                    <label>Tags (separate with commas)</label>
-                    <input type="text" 
-                        name="tags" 
-                        class="form-control @error('tags') is-invalid @enderror"
-                        value="{{ old('tags') }}"
-                        placeholder="e.g. football, champions league, real madrid">
-                    @error('tags') <small class="text-danger">{{ $message }}</small> @enderror
-                </div>
-
-                <!-- Short Description -->
-                <div class="col-md-6 mb-3">
-                    <label>Short Description</label>
-                    <textarea name="description" class="form-control @error('description') is-invalid @enderror"
-                              rows="2">{{ old('description') }}</textarea>
-                    @error('description') <small class="text-danger">{{ $message }}</small> @enderror
-                </div>
-
-                <!-- Content -->
-              {{--   <div class="col-12 mb-3">
-                    <label for="content" class="form-label">المحتوى</label>
-                    <textarea name="content" id="content" class="form-control">{{ old('content') }}</textarea>
-                    @error('content') <small class="text-danger">{{ $message }}</small> @enderror
-                </div> --}}
-
-                @include('components.forms.tinymce-editor')
-
-                <!-- Media -->
-                <div class="col-12 mb-3">
-                    <label>Main Media</label>
-                    <select name="media[0][type]" id="media_type" class="form-select mb-2">
-                        <option value="image" {{ old('media.0.type') == 'image' ? 'selected' : '' }}>Image</option>
-                        <option value="videotube" {{ old('media.0.type') == 'videotube' ? 'selected' : '' }}>YouTube Video</option>
-                        <option value="aivideo" {{ old('media.0.type') == 'aivideo' ? 'selected' : '' }}>AI YouTube Video</option>
-                    </select>
-
-                    <!-- Image input -->
-                    <div id="image_input">
-                        <input type="file" name="media[0][path]" class="form-control">
-                    </div>
-
-                    <!-- Video input -->
-                    <div class="d-none" id="video_input">
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                <input type="text" name="media[0][path]" class="form-control"
-                                       placeholder="https://www.youtube.com/embed/...">
+                            <div class="col-md-5">
+                                <select name="categories[{{ $index }}][subcategories][]" class="form-select" multiple>
+                                    @foreach($subcategories as $subcategory)
+                                        <option value="{{ $subcategory->id }}" 
+                                            @if(isset($cat['subcategories']) && in_array($subcategory->id, $cat['subcategories'])) selected @endif>
+                                            {{ $subcategory->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="col-md-6">
-                                <input type="file" name="media[0][thumbnail]" class="form-control">
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-sm btn-danger remove-category">Remove</button>
                             </div>
+                        </div>
+                    @endforeach
+                </div>
+                <button type="button" class="btn btn-sm btn-primary" id="add-category">Add Category</button>
+            </div>
+
+            <!-- Title -->
+            <div class="col-md-6 mb-3">
+                <label>Title</label>
+                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
+                       value="{{ old('title') }}">
+                @error('title') <small class="text-danger">{{ $message }}</small> @enderror
+            </div>
+
+            <!-- Slug -->
+            <div class="col-md-6 mb-3">
+                <label>Slug</label>
+                <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror"
+                       value="{{ old('slug') }}">
+                @error('slug') <small class="text-danger">{{ $message }}</small> @enderror
+            </div>
+
+            <!-- Tags -->
+            <div class="col-6 mb-3">
+                <label>Tags (separate with commas)</label>
+                <input type="text" 
+                    name="tags" 
+                    class="form-control @error('tags') is-invalid @enderror"
+                    value="{{ old('tags') }}"
+                    placeholder="e.g. football, champions league, real madrid">
+                @error('tags') <small class="text-danger">{{ $message }}</small> @enderror
+            </div>
+
+            <!-- Short Description -->
+            <div class="col-md-6 mb-3">
+                <label>Short Description</label>
+                <textarea name="description" class="form-control @error('description') is-invalid @enderror"
+                          rows="2">{{ old('description') }}</textarea>
+                @error('description') <small class="text-danger">{{ $message }}</small> @enderror
+            </div>
+
+            <!-- Content -->
+            @include('components.forms.tinymce-editor')
+
+            <!-- Media -->
+            <div class="col-12 mb-3">
+                <label>Main Media</label>
+                <select name="media[0][type]" id="media_type" class="form-select mb-2">
+                    <option value="image" {{ old('media.0.type') == 'image' ? 'selected' : '' }}>Image</option>
+                    <option value="videotube" {{ old('media.0.type') == 'videotube' ? 'selected' : '' }}>YouTube Video</option>
+                    <option value="aivideo" {{ old('media.0.type') == 'aivideo' ? 'selected' : '' }}>AI YouTube Video</option>
+                </select>
+
+                <!-- Image input -->
+                <div id="image_input">
+                    <input type="file" name="media[0][path]" class="form-control">
+                </div>
+
+                <!-- Video input -->
+                <div class="d-none" id="video_input">
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <input type="text" name="media[0][path]" class="form-control"
+                                   placeholder="https://www.youtube.com/embed/...">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="file" name="media[0][thumbnail]" class="form-control">
                         </div>
                     </div>
                 </div>
-
-                <!-- Submit -->
-                <div class="col-12">
-                    <button class="btn btn-success">Create Post</button>
-                </div>
-
             </div>
-        </form>
-    </div>
+
+            <!-- Submit -->
+            <div class="col-6">
+                <button class="btn btn-sm btn-success">Create Post</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
 </div>
 
 <!-- TinyMCE -->
@@ -180,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </select>
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-danger remove-category">Remove</button>
+                <button type="button" class="btn btn-sm btn-danger remove-category">Remove</button>
             </div>
         `;
         wrapper.appendChild(row);

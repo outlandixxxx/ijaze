@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class View extends Model
 {
-     public function article() {
-        return $this->belongsTo(Article::class);
+
+     protected $fillable = ['post_id', 'user_id', 'ip_address'];
+     
+     public function posts() {
+        return $this->belongsTo(Post::class);
     }
 
     public function user() {
