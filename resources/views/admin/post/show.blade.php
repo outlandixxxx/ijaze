@@ -1,11 +1,7 @@
-
-
-
 @extends('admin.admin')
 
 @section('content')
-    <div class="h-screen flex-grow-1 overflow-y-lg-auto">
-
+<div class=" flex-grow-1 ">
         <!-- Header -->
         <header class="bg-surface-primary border-bottom pt-6">
             <div class="container-fluid">
@@ -37,12 +33,20 @@
 
                     <!-- Nav Tabs -->
                     <ul class="nav nav-tabs mt-4 overflow-x border-0">
-                        <li class="nav-item">
-                            <a href="#my-posts" class="nav-link active" data-bs-toggle="tab">My Posts</a>
-                        </li>
-                        <li class="nav-item">
+
+                       
+                                <li class="nav-item">
+                                    <a href="#my-posts" class="nav-link active" data-bs-toggle="tab">My Posts</a>
+                                </li>
+                            
+                             @auth
+                            @if (Auth::user()->role === 'admin')
+                            <li class="nav-item">
                             <a href="#all-posts" class="nav-link" data-bs-toggle="tab">All Posts</a>
                         </li>
+                                @endif
+                        @endauth
+                        
                     </ul>
                 </div>
             </div>
@@ -207,7 +211,7 @@
 
                                                 <td class="align-middle">{{ $post->views_count ?? 0 }}</td>
                                                 <td class="align-middle">{{ $post->comments_count ?? 0 }}</td>
-                                                 <td class="text-end">
+                                                <td class="text-end">
                                                     <a href="{{ route('article', $post->slug) }}"
                                                         class="btn btn-sm btn-neutral">View</a>
                                                     <a href="{{ route('editpost', $post->id) }}"
@@ -233,7 +237,7 @@
                     </div>
 
                     {{-- ===================== ALL POSTS TAB ===================== --}}
-                    <div class="tab-pane fade" id="all-posts">
+                    <div class="tab-pane fade show" id="all-posts">
 
 
                         <!-- Card stats for all posts -->

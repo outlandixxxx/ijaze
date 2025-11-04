@@ -58,4 +58,13 @@ class User extends Authenticatable
     public function likes() {
         return $this->hasMany(Like::class);
     }
+
+    // Helper methods (already created earlier)
+public function isAdmin(): bool {
+    return $this->role === 'admin';
+}
+
+public function isCreator(): bool {
+    return $this->role === 'creator';
+}
 }

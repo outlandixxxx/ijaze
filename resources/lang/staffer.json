@@ -1,0 +1,50 @@
+{
+  "ar": {
+    "title": "هيأة التحرير",
+    "intro": "\"Ijaz Plus\" موقع إخباري مغربي شامل، متجدد على مدار الساعة.",
+    "publisher": "الشركة الناشرة",
+    "editorial": "هيأة التحرير",
+    "director": "مدير النشر ورئيس التحرير: بدر مجدان",
+    "video": "الفيديو",
+    "video_team": "أسامة إدريسي المباركي، عبد الإله آيت احماد",
+    "tech": "المسؤول التقني للموقع",
+    "tech_name": "بدر سعود",
+    "contact_title": "للتواصل",
+    "email": "البريد الإلكتروني",
+    "or": "أو",
+    "phone": "الهاتف",
+    "advertising_title": "الإشهار"
+  },
+  "en": {
+    "title": "Editorial Team",
+    "intro": "\"Ijaz Plus\" is a comprehensive Moroccan news website, updated 24/7.",
+    "publisher": "Publishing Company",
+    "editorial": "Editorial Team",
+    "director": "Publication Director and Editor-in-Chief: Badr Majdan",
+    "video": "Video",
+    "video_team": "Oussama Idrissi El Mbarki, Abdelilah Ait Ahmad",
+    "tech": "Technical Manager",
+    "tech_name": "Badr Saoud",
+    "contact_title": "Contact Us",
+    "email": "Email",
+    "or": "or",
+    "phone": "Phone",
+    "advertising_title": "Advertising"
+  },
+  "fr": {
+    "title": "Équipe Éditoriale",
+    "intro": "\"Ijaz Plus\" est un site d'actualités marocain complet, mis à jour 24h/24 et 7j/7.",
+    "publisher": "Société Éditrice",
+    "editorial": "Équipe Éditoriale",
+    "director": "Directeur de publication et Rédacteur en chef : Badr Majdan",
+    "video": "Vidéo",
+    "video_team": "Oussama Idrissi El Mbarki, Abdelilah Ait Ahmad",
+    "tech": "Responsable Technique",
+    "tech_name": "Badr Saoud",
+    "contact_title": "Nous Contacter",
+    "email": "Email",
+    "or": "ou",
+    "phone": "Téléphone",
+    "advertising_title": "Publicité"
+  }
+}

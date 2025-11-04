@@ -2,27 +2,40 @@
 
 namespace App\Models;
 
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-      public function posts() {
+    use HasFactory;
+
+    protected $fillable = [
+        'post_id',
+        'name',
+        'email',
+        'content',
+        'parent_id',
+        'likes_count',
+        'dislikes_count',
+    ];
+
+    // ✅ Relationship with Post
+    public function post()
+    {
         return $this->belongsTo(Post::class);
     }
 
-    public function user() {
-        return $this->belongsTo(User::class);
-    }
-
-    public function parent() {
+    // ✅ Replies (nested comments)
+    public function parent()
+    {
         return $this->belongsTo(Comment::class, 'parent_id');
     }
 
-    public function replies() {
+    public function replies()
+    {
         return $this->hasMany(Comment::class, 'parent_id');
     }
 
-    public function likes() {
-        return $this->morphMany(Like::class, 'likeable');
-    }
+  
 }

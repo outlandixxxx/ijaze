@@ -129,6 +129,21 @@
     transform-origin: center;
   }
 
+
+/* Offcanvas menu items */
+.offcanvas-body .nav-link {
+    font-weight: bold;   /* bold */
+    font-size: 1.25rem;  /* bigger */
+    text-align: right;   /* right align */
+}
+
+.offcanvas-body .nav-item {
+    border-bottom: 2px solid #fff; /* solid bottom border */
+    padding-bottom: 0.5rem;
+}
+
+
+
   #line1, #line2, #line3 {
     transition: transform 0.3s ease, opacity 0.2s ease, background-color 0.3s ease;
     transform-origin: center;

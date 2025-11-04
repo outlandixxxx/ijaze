@@ -1,11 +1,13 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import "bootstrap-icons/font/bootstrap-icons.css";
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
 @import "./footer.css";
 @import "./bnews.css";
 @import "./customtabs.css";
+@import "./contact.css";
 
 
-@import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
 
@@ -17,18 +19,28 @@
 
 
 /* 3. Custom CSS last */
+/* Global Font Family - Cairo for entire website */
+*:not([class*="fa-"]):not([class*="bi-"]) {
+  font-family: "Cairo", sans-serif !important;
+}
+
+/* Ensure FontAwesome icons use their font */
+[class*="fa-"] {
+  font-family: "Font Awesome 7 Free", "Font Awesome 7 Brands" !important;
+}
+
+/* Ensure body also uses Cairo */
 body {
   background-color: #121212;
   color: white;
-  font-family: "Noto Sans Arabic", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-optical-sizing: auto;
 }
 
 h1, h2, h3 {
   color: #FBC550;
-  font-family: "Noto Sans Arabic", sans-serif;
+  font-family: "Cairo", sans-serif;
   font-optical-sizing: auto;
-
 }
 
 .navbar-custom {
@@ -38,13 +50,16 @@ h1, h2, h3 {
 }
 
 .noto-sans-arabic{
-    font-family: "Noto Sans Arabic", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 700;
+    font-weight: 600;
     font-style: normal;
     font-variation-settings:
-      "wdth" 100;
+    "wdth" 100;
+    line-height: 1.2;
+   
   }
+
 
 /* Carousel */
 .carousel-item img {
@@ -322,45 +337,6 @@ margin-top: 6rem;
 
 
 
-/*main carousle buttons*/
-
-/* Main carousel buttons */
-.carousel-control-prev,
-.carousel-control-next {
-    width: auto;                  /* shrink to content */
-    top: 50%;                     /* vertically center */
-    transform: translateY(-50%);
-}
-
-.carousel-control-prev {
-    left: 10px;                   /* distance from carousel */
-}
-
-.carousel-control-next {
-    right: 10px;
-}
-
-/* Make arrows bigger on large screens */
-.carousel-control-prev i,
-.carousel-control-next i {
-    font-size: 4rem;               /* bigger than fa-3x */
-}
-
-/* Adjust on smaller screens */
-@media (max-width: 992px) {
-    .carousel-control-prev i,
-    .carousel-control-next i {
-        font-size: 3rem;           /* smaller on tablet */
-    }
-}
-
-@media (max-width: 576px) {
-    .carousel-control-prev i,
-    .carousel-control-next i {
-        font-size: 2.5rem;         /* smaller on mobile */
-    }
-}
-
 
 /* amusing cards */ 
 
@@ -386,7 +362,7 @@ margin-top: 6rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 1rem;
+    
 }
 
 .card-amusing .card-title,
@@ -397,5 +373,69 @@ margin-top: 6rem;
 }
 
 
+/* Carousel controls positioning - LTR */
+.carousel-control-prev,
+.carousel-control-next {
+  width: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 1 !important;
+  transition: transform 0.3s ease;
+}
+
+.carousel-control-prev {
+  left: 10px;
+}
+
+.carousel-control-next {
+  right: 10px;
+}
+
+.carousel-control-prev i,
+.carousel-control-next i {
+  font-size: 4rem;
+  color: #fcb550 !important;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-control-prev:hover i,
+.carousel-control-next:hover i {
+  color: #ffdc91 !important;
+  transform: scale(1.15);
+}
+
+@media (max-width: 992px) {
+  .carousel-control-prev i,
+  .carousel-control-next i {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-control-prev i,
+  .carousel-control-next i {
+    font-size: 2.5rem;
+  }
+}
 
 
+/* Add to your app.css */
+
+.post-content {
+    /* Break long words */
+    word-break: break-word;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.post-content p {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Ensure all post content stays within bounds */
+.col-md-8 {
+    min-width: 0; /* Important for flex containers */
+    overflow-wrap: break-word;
+}

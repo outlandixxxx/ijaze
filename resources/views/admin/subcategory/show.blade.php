@@ -3,8 +3,7 @@
  @extends('admin.admin')
 
 @section('content')
-<div class="h-screen flex-grow-1 overflow-y-lg-auto">
-
+<div class=" flex-grow-1 ">
     <!-- Header -->
     <header class="bg-surface-primary border-bottom pt-6">
         <div class="container-fluid">

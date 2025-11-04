@@ -18,68 +18,108 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mews\Purifier\Facades\purifier;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 
 class AdminController extends Controller
 {
-    public function index() {
+   public function index() 
+{
+    $now = Carbon::now();
+    $user = Auth::user();
 
-           $now = Carbon::now();
+    // Define date ranges
+    $startOfThisMonth = $now->copy()->startOfMonth();
+    $endOfThisMonth   = $now->copy()->endOfMonth();
 
-        // Define date ranges
-        $startOfThisMonth = $now->copy()->startOfMonth();
-        $endOfThisMonth   = $now->copy()->endOfMonth();
+    $startOfLastMonth = $now->copy()->subMonth()->startOfMonth();
+    $endOfLastMonth   = $now->copy()->subMonth()->endOfMonth();
 
-        $startOfLastMonth = $now->copy()->subMonth()->startOfMonth();
-        $endOfLastMonth   = $now->copy()->subMonth()->endOfMonth();
+    // --- This month's stats ---
+    $thisMonth = [
+        'posts' => Post::query()
+            ->when($user->isCreator(), function ($query) use ($user) {
+                return $query->where('author_id', $user->id);
+            })
+            ->whereBetween('created_at', [$startOfThisMonth, $endOfThisMonth])
+            ->count(),
 
-        // --- This month's stats ---
-        $thisMonth = [
-            'posts'         => Post::whereBetween('created_at', [$startOfThisMonth, $endOfThisMonth])->count(),
-            'visitors'      => Visitor::whereBetween('created_at', [$startOfThisMonth, $endOfThisMonth])->count(),
-            'comments'      => Comment::whereBetween('created_at', [$startOfThisMonth, $endOfThisMonth])->count(),
-            'subscriptions' => Subscriber::whereBetween('created_at', [$startOfThisMonth, $endOfThisMonth])->count(),
-        ];
+        // Total website visitors for everyone
+        'visitors' => Visitor::whereBetween('created_at', [$startOfThisMonth, $endOfThisMonth])->count(),
 
-        // --- Last month's stats ---
-        $lastMonth = [
-            'posts'         => Post::whereBetween('created_at', [$startOfLastMonth, $endOfLastMonth])->count(),
-            'visitors'      => Visitor::whereBetween('created_at', [$startOfLastMonth, $endOfLastMonth])->count(),
-            'comments'      => Comment::whereBetween('created_at', [$startOfLastMonth, $endOfLastMonth])->count(),
-            'subscriptions' => Subscriber::whereBetween('created_at', [$startOfLastMonth, $endOfLastMonth])->count(),
-        ];
+        'comments' => Comment::query()
+            ->when($user->isCreator(), function ($query) use ($user) {
+                return $query->whereHas('post', function ($q) use ($user) {
+                    $q->where('author_id', $user->id);
+                });
+            })
+            ->whereBetween('created_at', [$startOfThisMonth, $endOfThisMonth])
+            ->count(),
 
-        // --- Evolution (% difference) ---
-        $evolution = [];
-        foreach ($thisMonth as $key => $value) {
-            $prev = $lastMonth[$key];
-            $evolution[$key] = $prev > 0 ? round((($value - $prev) / $prev) * 100, 1) : 0;
-        }
+        'subscriptions' => Subscriber::whereBetween('created_at', [$startOfThisMonth, $endOfThisMonth])->count(),
+    ];
 
-        // --- Lifetime stats per author ---
-        $authors = User::withCount(['posts'])
-            ->with(['posts' => function ($q) {
-                $q->withCount(['comments', 'views']);
-            }])
-            ->get()
-            ->map(function ($user) {
-                $totalComments = $user->posts->sum('comments_count');
-                $totalVisitors = $user->posts->sum('views_count');
-                return [
-                    'user' => $user,
-                    'posts' => $user->posts_count,
-                    'comments' => $totalComments,
-                    'visitors' => $totalVisitors,
-                     'created_at' => $user->created_at, // make sure this exists
-                ];
-            });
+    // --- Last month's stats ---
+    $lastMonth = [
+        'posts' => Post::query()
+            ->when($user->isCreator(), function ($query) use ($user) {
+                return $query->where('author_id', $user->id);
+            })
+            ->whereBetween('created_at', [$startOfLastMonth, $endOfLastMonth])
+            ->count(),
 
-        return view('admin.dashboard', [
-            'stats' => $thisMonth,
-            'evolution' => $evolution,
-            'authors' => $authors,
-        ]);
+        // Total website visitors for everyone
+        'visitors' => Visitor::whereBetween('created_at', [$startOfLastMonth, $endOfLastMonth])->count(),
+
+        'comments' => Comment::query()
+            ->when($user->isCreator(), function ($query) use ($user) {
+                return $query->whereHas('post', function ($q) use ($user) {
+                    $q->where('author_id', $user->id);
+                });
+            })
+            ->whereBetween('created_at', [$startOfLastMonth, $endOfLastMonth])
+            ->count(),
+
+        'subscriptions' => Subscriber::whereBetween('created_at', [$startOfLastMonth, $endOfLastMonth])->count(),
+    ];
+
+    // --- Evolution (% difference) ---
+    $evolution = [];
+    foreach ($thisMonth as $key => $value) {
+        $prev = $lastMonth[$key];
+        $evolution[$key] = $prev > 0 ? round((($value - $prev) / $prev) * 100, 1) : 0;
     }
+
+    // --- Lifetime stats per author ---
+    $authors = User::query()
+        ->when($user->isCreator(), function ($query) use ($user) {
+            return $query->where('id', $user->id);
+        })
+        ->withCount(['posts'])
+        ->with(['posts' => function ($q) {
+            $q->withCount(['comments', 'views']);
+        }])
+        ->get()
+        ->map(function ($author) {
+            $totalComments = $author->posts->sum('comments_count');
+            $totalVisitors = $author->posts->sum('views_count');
+            return [
+                'user' => $author,
+                'posts' => $author->posts_count,
+                'comments' => $totalComments,
+                'visitors' => $totalVisitors,
+                'created_at' => $author->created_at,
+            ];
+        });
+
+    return view('admin.dashboard', [
+        'stats' => $thisMonth,
+        'evolution' => $evolution,
+        'authors' => $authors,
+    ]);
+}
+
 
 
 //category functions////////////////////
@@ -242,61 +282,149 @@ class AdminController extends Controller
 
     }
 
+////end subcategory 
 
+
+
+//user functions////////////////////
+
+
+    public function showuser() {
+        
+          $users = User::latest()->paginate(10);
+    return view('admin.user.show', compact('users'));
+    }
+
+    public function createuser() {
+
+        return view('admin.user.create');
+    }
+
+    public function storeuser(Request $request) {
+
+             $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email|max:255',
+            'password' => [
+                'required',
+                'confirmed',
+                Password::min(8)
+                    ->letters()
+                    ->numbers()
+            ],
+            'role' => 'required|in:admin,creator',
+        ]);
+
+        // Hash the password before storing
+        User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+             'role' => $validated['role'],
+        ]);
+
+        return redirect()->route('createuser')->with('success', 'User created successfully!');
+    }
+
+   // Show edit form
+    public function edituser($id)
+    {
+
+
+        $user = User::findOrFail($id); // fetch the category
+        return view('admin.user.edit', compact('user'));
+    }
+
+    // Handle update
+   
+     public function updateuser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id . '|max:255',
+            'password' => [
+                'nullable',
+                'confirmed',
+                Password::min(8)
+                    ->letters()
+                    ->numbers()
+            ],
+             'role' => 'required|in:admin,creator',
+        ]);
+
+        // Update user data
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+         $user->role = $validated['role']; 
+
+        // Only update password if provided
+        if (!empty($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        $user->save();
+
+        return redirect()->route('showuser')->with('success', 'User updated successfully!');
+    }
+
+    public function deleteuser($id) {
+
+        $user = User::findOrFail($id);
+            $user->delete();
+
+            return redirect()->route('showuser')->with('success', 'User deleted successfully.');
+
+    }
+
+///end user //////////////////////////////////////////////////////////
 
 
 
 ////post ///////////////////////////////////////////////////////
 
-    public function showpost() {
-        $userId = Auth::id(); // currently logged-in admin
+   public function showpost() {
+    $userId = Auth::id();
 
-        // ========== My Posts ==========
-        $myPosts = Post::with('media') // eager load media
-            ->withCount('comments')
-            ->where('author_id', $userId)
-            ->latest()
-            ->get();
+    // ===== My Posts =====
+    $myPosts = Post::with(['media'])
+        ->withCount(['views', 'comments']) // adds views_count and comments_count
+        ->where('author_id', $userId)
+        ->latest()
+        ->get(); // single query with counts appended [views_count, comments_count]
 
-        // Count posts by media type
-        $imagePosts = $myPosts->filter(fn($post) => $post->media->first()?->type === 'image')->count();
-        $videoPosts = $myPosts->filter(fn($post) => in_array($post->media->first()?->type, ['videotube', 'aivideo']))->count();
+    $imagePosts = $myPosts->filter(fn($p) => $p->media->first()?->type === 'image')->count();
+    $videoPosts = $myPosts->filter(fn($p) => in_array($p->media->first()?->type, ['videotube', 'aivideo']))->count();
 
-        // My Stats for cards
-        $myStats = [
-        'posts' => $myPosts->count(),
-        'views' => $myPosts->sum(fn($post) => $post->views->count()), // collection count
-        'comments' => $myPosts->sum('comments_count'),
-        'image_posts' => $imagePosts,
-        'video_posts' => $videoPosts,
-        ];
+    $myStats = [
+        'posts'        => $myPosts->count(),
+        'views'        => $myPosts->sum('views_count'),
+        'comments'     => $myPosts->sum('comments_count'),
+        'image_posts'  => $imagePosts,
+        'video_posts'  => $videoPosts,
+    ];
 
-        $myStats = [
-            'posts' => $myPosts->count(),
-            'views' => $myPosts->sum(fn($post) => $post->views->count()), // collection count
-            'comments' => $myPosts->sum('comments_count'),
-            'image_posts' => $imagePosts,
-            'video_posts' => $videoPosts,
-        ];
-        // ========== All Posts ==========
-        $allPosts = Post::with('media', 'author')
-            ->withCount('comments')
-            ->latest()
-            ->get();
 
-        $allImagePosts = $allPosts->filter(fn($post) => $post->media->first()?->type === 'image')->count();
-        $allVideoPosts = $allPosts->filter(fn($post) => in_array($post->media->first()?->type, ['videotube', 'aivideo']))->count();
+    // ===== All Posts =====
+    $allPosts = Post::with(['media','author'])
+        ->withCount(['views', 'comments'])
+        ->latest()
+        ->get();
 
-        $allStats = [
-        'posts' => $allPosts->count(),
-        'views' => $allPosts->sum(fn($post) => $post->views->count()),
-        'comments' => $allPosts->sum('comments_count'),
-        'image_posts' => $allImagePosts,
-        'video_posts' => $allVideoPosts,
-        ];
+    $allImagePosts = $allPosts->filter(fn($p) => $p->media->first()?->type === 'image')->count();
+    $allVideoPosts = $allPosts->filter(fn($p) => in_array($p->media->first()?->type, ['videotube', 'aivideo']))->count();
 
-        return view('admin.post.show', compact('myPosts', 'allPosts', 'myStats', 'allStats'));
-    }
+    $allStats = [
+        'posts'        => $allPosts->count(),
+        'views'        => $allPosts->sum('views_count'),
+        'comments'     => $allPosts->sum('comments_count'),
+        'image_posts'  => $allImagePosts,
+        'video_posts'  => $allVideoPosts,
+    ];
+
+    return view('admin.post.show', compact('myPosts', 'allPosts', 'myStats', 'allStats'));
+}
 
 
 
@@ -340,7 +468,7 @@ class AdminController extends Controller
                 'description' => $validated['description'] ?? null,
                 //'content' => clean($validated['content']), // sanitize HTML from TinyMCE
                 'content' => Purifier::clean($validated['content']),
-                'author_id' => '1',
+                 'author_id' => Auth::id(),
                 'published_at' => now(),
             ]);
 
@@ -395,6 +523,8 @@ class AdminController extends Controller
                 $post->tags()->sync($tags);
             }
         });
+
+        return redirect()->route('showpost')->with('success', 'Post created successfully.');
 
      }
 
@@ -486,17 +616,139 @@ class AdminController extends Controller
 // end Post///////////////////////////////////////////////////
 
 
-    public function showsubscribe() {
 
-    return view('admin.subscribe');
+//subscriber ////////////////
+ 
 
+
+
+ public function showsubscribe(Request $request)
+    {
+        $query = Subscriber::query();
+
+        // Apply date filters
+        if ($request->filled('date_from')) {
+            $query->whereDate('created_at', '>=', $request->date_from);
+        }
+
+        if ($request->filled('date_to')) {
+            $query->whereDate('created_at', '<=', $request->date_to);
+        }
+
+        // Apply email search
+        if ($request->filled('search')) {
+            $query->where('email', 'LIKE', '%' . $request->search . '%');
+        }
+
+        // Get subscribers with pagination
+        $subscribers = $query->latest()
+            ->paginate(20)
+            ->withQueryString();
+
+        // Get stats
+        $totalSubscribers = Subscriber::count();
+        $todaySubscribers = Subscriber::whereDate('created_at', today())->count();
+        $thisMonthSubscribers = Subscriber::whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->count();
+
+        return view('admin.subscribe', compact(
+            'subscribers',
+            'totalSubscribers',
+            'todaySubscribers',
+            'thisMonthSubscribers'
+        ));
+    }
+
+    /**
+     * Delete subscriber
+     */
+    public function destroysubscriber($id)
+    {
+        try {
+            $subscriber = Subscriber::findOrFail($id);
+            $email = $subscriber->email;
+            $subscriber->delete();
+
+            return redirect()->route('showsubscribe')
+                ->with('success', "Subscriber '{$email}' deleted successfully!");
+
+        } catch (\Exception $e) {
+            return redirect()->route('showsubscribe')
+                ->with('error', 'Failed to delete subscriber: ' . $e->getMessage());
+        }
     }
 
 
-    public function showcomment() {
 
-    return view('admin.comment');
 
+//comment
+
+ public function showcomment(Request $request)
+    {
+        // Start query - get ALL comments (not just parents)
+        $query = Comment::with(['post', 'parent', 'replies']);
+
+        // Apply search filter
+        if ($request->has('search') && !empty($request->input('search'))) {
+            $searchTerm = $request->input('search');
+            
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('name', 'LIKE', '%' . $searchTerm . '%')
+                  ->orWhere('email', 'LIKE', '%' . $searchTerm . '%');
+            });
+        }
+
+        // Paginate with query string preserved
+        $comments = $query->latest()
+            ->paginate(20)
+            ->withQueryString();
+
+        return view('admin.comment', compact('comments'));
+    }
+
+
+
+public function destroycomment($id)
+    {
+        $comment = Comment::findOrFail($id);
+
+        try {
+            DB::transaction(function () use ($comment) {
+                // Check if this is a parent comment (has no parent_id)
+                if (is_null($comment->parent_id)) {
+                    // It's a parent - delete it and all children recursively
+                    $this->deleteCommentWithReplies($comment);
+                } else {
+                    // It's a child/reply - delete only this comment
+                    $comment->delete();
+                }
+            });
+
+            return redirect()->route('showcomment')
+                ->with('success', 'Comment deleted successfully!');
+
+        } catch (\Exception $e) {
+            return redirect()->route('showcomment')
+                ->with('error', 'Failed to delete comment: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Recursively delete comment and all its children
+     */
+    private function deleteCommentWithReplies(Comment $comment)
+    {
+        // Get all direct replies
+        $replies = Comment::where('parent_id', $comment->id)->get();
+
+        // Recursively delete each reply
+        foreach ($replies as $reply) {
+            $this->deleteCommentWithReplies($reply);
+        }
+
+        // Finally delete the parent comment
+        $comment->delete();
     }
 
 

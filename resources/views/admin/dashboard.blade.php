@@ -1,8 +1,7 @@
 @extends('admin.admin')
 @section('content')
     <!-- Main content -->
-    <div class="h-screen flex-grow-1 overflow-y-lg-auto">
-        <!-- Header -->
+<div class=" flex-grow-1 ">        <!-- Header -->
         <header class="bg-surface-primary border-bottom pt-6">
             <div class="container-fluid">
                 <div class="mb-npx">
@@ -58,32 +57,7 @@
                         </div>
                     </div>
 
-                    <!-- Visitors -->
-                    <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="card shadow border-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Total of visitors</span>
-                                        <span class="h3 font-bold mb-0">{{ $stats['visitors'] }}</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
-                                            <i class="bi bi-eye"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-2 mb-0 text-sm">
-                                    @php $growth = $evolution['visitors']; @endphp
-                                    <span class="badge badge-pill {{ $growth >= 0 ? 'bg-soft-success text-success' : 'bg-soft-danger text-danger' }} me-2">
-                                        <i class="bi {{ $growth >= 0 ? 'bi-arrow-up' : 'bi-arrow-down' }} me-1"></i>
-                                        {{ abs($growth) }}%
-                                    </span>
-                                    <span class="text-nowrap text-xs text-muted">Since last month</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  
 
                     <!-- Comments -->
                     <div class="col-xl-3 col-sm-6 col-12">
@@ -113,6 +87,9 @@
                     </div>
 
                     <!-- Subscriptions -->
+
+                     @auth
+                       @if (Auth::user()->role === 'admin')
                     <div class="col-xl-3 col-sm-6 col-12">
                         <div class="card shadow border-0">
                             <div class="card-body">
@@ -138,6 +115,37 @@
                             </div>
                         </div>
                     </div>
+
+
+                      <!-- Visitors -->
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Total of visitors</span>
+                                        <span class="h3 font-bold mb-0">{{ $stats['visitors'] }}</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                                            <i class="bi bi-eye"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2 mb-0 text-sm">
+                                    @php $growth = $evolution['visitors']; @endphp
+                                    <span class="badge badge-pill {{ $growth >= 0 ? 'bg-soft-success text-success' : 'bg-soft-danger text-danger' }} me-2">
+                                        <i class="bi {{ $growth >= 0 ? 'bi-arrow-up' : 'bi-arrow-down' }} me-1"></i>
+                                        {{ abs($growth) }}%
+                                    </span>
+                                    <span class="text-nowrap text-xs text-muted">Since last month</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     @endif
+                   @endauth
                 </div>
 
                 <!-- Authors table -->

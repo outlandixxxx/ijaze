@@ -1,0 +1,432 @@
+/* RTL-specific imports */
+@import 'bootstrap/dist/css/bootstrap.rtl.min.css';
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+@import "./footer.css";
+@import "./bnews.css";
+@import "./customtabs.css";
+@import "./contact.css";
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* All your custom CSS (same as app.css) */
+
+/* Global Font Family - Cairo for entire website */
+*:not([class*="fa-"]):not([class*="bi-"]) {
+  font-family: "Cairo", sans-serif !important;
+}
+
+/* Ensure FontAwesome icons use their font */
+[class*="fa-"] {
+  font-family: "Font Awesome 7 Free", "Font Awesome 7 Brands" !important;
+}
+
+/* Ensure body also uses Cairo */
+body {
+  background-color: #121212;
+  color: white;
+  font-family: "Cairo", sans-serif;
+  font-optical-sizing: auto;
+}
+
+
+
+
+h1, h2, h3 {
+color: #FBC550;
+font-family: "Cairo", sans-serif;
+font-optical-sizing: auto;
+}
+
+.navbar-custom {
+background-color: #1a1a1a;
+z-index: 40;
+height: 5.2rem;
+}
+
+.noto-sans-arabic{
+font-family: "Cairo", sans-serif;
+font-optical-sizing: auto;
+font-weight: 600;
+font-style: normal;
+font-variation-settings:
+"wdth" 100;
+line-height: 1.2;
+}
+
+/* Carousel */
+.carousel-item img {
+width: 100%;
+height: 700px;
+object-fit: cover;
+}
+
+/* Navbar toggler (hamburger) fix */
+.navbar-toggler {
+border-color: rgb(255, 255, 255);
+color: #FBC550;
+}
+
+.navbar-toggler-icon {
+background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='3' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.menustyle {
+cursor: pointer;
+text-decoration: none;
+outline: transparent solid 2px;
+outline-offset: 2px;
+color: inherit;
+height: 2.75rem;
+border-bottom: 0.063rem solid rgba(226, 232, 240, 0.6);
+border-top-color: rgba(226, 232, 240, 0.6);
+border-right-color: rgba(226, 232, 240, 0.6);
+border-left-color: rgba(226, 232, 240, 0.6);
+font-weight: 800;
+font-size: larger;
+}
+
+.offcanvastyle {
+width: 300px;
+}
+
+.mt-8 {
+margin-top: 6rem;
+}
+
+.swiper-card-img {
+overflow: hidden;
+border-radius: 20px;
+}
+
+.swiper-card-img-zoom {
+width: 100%;
+height: 250px;
+object-fit: cover;
+border-radius: 20px;
+transition: transform 0.5s ease;
+}
+
+.card-hover:hover .swiper-card-img-zoom {
+transform: scale(1.1);
+}
+
+.card-ration {
+aspect-ratio: 9 / 16;
+}
+
+@media (max-width: 992px) {
+.card-img {
+height: 200px;
+}
+}
+
+@media (max-width: 576px) {
+.card-img {
+height: 150px;
+}
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+color: #fbc550 !important;
+z-index: 20;
+}
+
+.swiper-button-next {
+right: 10px;
+}
+
+.swiper-button-prev {
+left: 10px;
+}
+
+.swiper-pagination {
+bottom: 10px;
+z-index: 20;
+color: rgb(225, 125, 44);
+}
+
+.card video {
+object-fit: cover;
+border-radius: 15px;
+}
+
+.small-video:hover .play-button {
+transform: scale(1.1);
+transition: 0.3s;
+}
+
+#featuredVideo {
+width: 100%;
+max-width: 400px;
+aspect-ratio: 9 / 16;
+margin: 0 auto 20px auto;
+position: relative;
+background-color: #333;
+border-radius: 10px;
+overflow: hidden;
+text-align: center;
+}
+
+#featuredVideo video {
+width: 100%;
+height: 100%;
+object-fit: cover;
+border-radius: 10px;
+}
+
+.video-card {
+position: relative;
+border-radius: 10px;
+overflow: hidden;
+background-color: black;
+cursor: pointer;
+}
+
+.video-card-img {
+width: 100%;
+aspect-ratio: 9 / 16;
+object-fit: cover;
+border-radius: 0.5rem;
+}
+
+.play-button {
+cursor: pointer;
+transition: 0.3s;
+}
+
+.video-card:hover .play-button {
+transform: scale(1.1);
+}
+
+@media (max-width: 576px) {
+#featuredVideo {
+max-width: 90%;
+}
+}
+
+.carousel .card {
+background: transparent !important;
+border: none;
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+transition: transform 0.3s ease;
+}
+
+.carousel .card:hover {
+transform: scale(1.03);
+}
+
+.carousel .card img {
+height: 280px;
+object-fit: cover;
+}
+
+.carousel .card-img-overlay {
+background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+}
+
+.carousel .card h5 {
+font-size: 1rem;
+}
+
+.custom-card {
+position: relative;
+border: none;
+border-radius: 0;
+overflow: hidden;
+height: 280px;
+}
+
+.custom-card-hover {
+border: 1px solid transparent;
+transition: all 0.3s ease;
+box-sizing: border-box;
+}
+
+.custom-card:hover {
+border-color: #fcb550;
+box-shadow: 0 4px 12px rgba(252, 181, 80, 0.4);
+transform: translateY(0);
+}
+
+.custom-card-img {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-size: cover;
+background-position: center;
+}
+
+.custom-card-overlay {
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 40px;
+background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+display: flex;
+align-items: flex-end;
+}
+
+.custom-card-overlay h5 {
+margin: 0;
+}
+
+.video-wrapper {
+display: flex;
+justify-content: center;
+width: 100%;
+max-width: 912px;
+margin: 0 auto;
+background: #000;
+}
+
+.video-wrapper iframe {
+width: 100%;
+height: calc(100vw * 9 / 16);
+max-height: 513px;
+aspect-ratio: auto;
+object-fit: contain;
+}
+
+@media (max-aspect-ratio: 9/16) {
+.video-wrapper iframe {
+width: auto;
+height: 513px;
+}
+}
+
+
+.card-amusing {
+position: relative;
+overflow: hidden;
+border-radius: 15px;
+}
+
+.card-amusing .card-img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform 0.5s ease;
+}
+
+.card-amusing.card-hover:hover .card-img {
+transform: scale(1.1);
+}
+
+.card-amusing .card-img-overlay {
+background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0));
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+}
+
+.card-amusing .card-title,
+.card-amusing .card-text {
+margin: 0;
+color: #fff;
+text-shadow: 0 2px 5px rgba(0,0,0,0.7);
+}
+
+
+
+/* Carousel controls positioning - RTL (SWAPPED) */
+.carousel-control-prev,
+.carousel-control-next {
+  width: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 1 !important;
+  transition: transform 0.3s ease;
+}
+
+/* SWAPPED: Previous button on RIGHT for RTL */
+.carousel-control-prev {
+  left: auto;
+  right: 10px;
+}
+
+/* SWAPPED: Next button on LEFT for RTL */
+.carousel-control-next {
+  right: auto;
+  left: 10px;
+}
+
+.carousel-control-prev i,
+.carousel-control-next i {
+  font-size: 4rem;
+  color: #fcb550 !important;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-control-prev:hover i,
+.carousel-control-next:hover i {
+  color: #ffdc91 !important;
+  transform: scale(1.15);
+}
+
+@media (max-width: 992px) {
+  .carousel-control-prev i,
+  .carousel-control-next i {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-control-prev i,
+  .carousel-control-next i {
+    font-size: 2.5rem;
+  }
+}
+
+/* Add to your app.css */
+
+.post-content {
+    /* Break long words */
+    word-break: break-word;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.post-content p {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Ensure all post content stays within bounds */
+.col-md-8 {
+    min-width: 0; /* Important for flex containers */
+    overflow-wrap: break-word;
+}
+
+
+/* Email input RTL fix - Add this to your rtl-app.css */
+
+/* Keep email value LTR (for typing email addresses correctly) */
+input[type="email"] {
+    direction: ltr;
+    text-align: left;
+}
+
+/* Make placeholder RTL and right-aligned for Arabic text */
+input[type="email"]::placeholder {
+    direction: rtl;
+    text-align: right;
+}
+
+/* For all other text inputs, ensure they follow RTL */
+input[type="text"]::placeholder,
+textarea::placeholder {
+    direction: rtl;
+    text-align: right;
+}

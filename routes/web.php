@@ -3,12 +3,28 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\SubscriberController;
 
 
 
+
+
+// Login routes
+
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+
+//public pages routes 
+
 Route::get('/', [PagesController::class, 'index'])->name('index');
-//Route::get('/breakingnews', [PagesController::class, 'breakingnews'])->name('breakingnews');
 Route::get('/news', [PagesController::class, 'news'])->name('news');
 
 Route::get('/sport', [PagesController::class, 'sport'])->name('sport');
@@ -22,9 +38,21 @@ Route::get('/article/{slug}', [PagesController::class, 'article'])->name('articl
 Route::get('/tag/{name}', [PagesController::class, 'tag'])->name('tag');
 
 
+
+
+//profile 
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
+});
+
 //admin
 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
 Route::get('/admin/category/index', [AdminController::class, 'showcategory'])->name('showcategory');
 Route::get('/admin/category/create', [AdminController::class, 'createcategory'])->name('createcategory');
@@ -43,6 +71,15 @@ Route::post('/admin/subcategory/update/{id}', [AdminController::class, 'updatesu
 Route::get('/admin/subcategory/delete/{id}', [AdminController::class, 'deletesubcategory'])->name('deletesubcategory');
 
 
+Route::get('/admin/users/index', [AdminController::class, 'showuser'])->name('showuser');
+Route::get('/admin/users/create', [AdminController::class, 'createuser'])->name('createuser');
+Route::get('/admin/users/edit/{id}', [AdminController::class, 'edituser'])->name('edituser');
+Route::post('/admin/users/store', [AdminController::class, 'storeuser'])->name('storeuser');
+Route::post('/admin/users/update/{id}', [AdminController::class, 'updateuser'])->name('updateuser');
+Route::get('/admin/users/delete/{id}', [AdminController::class, 'deleteuser'])->name('deleteuser');
+
+
+
 
 Route::get('/admin/post/index', [AdminController::class, 'showpost'])->name('showpost');
 Route::get('/admin/post/create', [AdminController::class, 'createpost'])->name('createpost');
@@ -54,22 +91,60 @@ Route::get('/admin/post/delete/{id}', [AdminController::class, 'deletepost'])->n
 
 //subscribe
 
-Route::get('/admin/subscribe/index', [AdminController::class, 'showsubscribe'])->name('showsubscribe');
-Route::post('/subscribe', [SubscriberController::class, 'subscribe'])->name('subscribe');
 
 //comments
 
-//subscribe
+ Route::get('/admin/comments', [AdminController::class, 'showcomment'])->name('showcomment');
+    Route::delete('/admin/comments/{id}', [AdminController::class, 'destroycomment'])->name('comments.destroy');
 
-Route::get('/admin/comment/index', [AdminController::class, 'showcomment'])->name('showcomment');
-//Route::post('/comments', [CommentController::class, 'subscribe'])->name('comment');
+//subscribers 
+
+
+Route::get('/admin/subscribe', [AdminController::class, 'showsubscribe'])->name('showsubscribe');
+    Route::delete('/admin/subscribers/{id}', [AdminController::class, 'destroysubscriber'])->name('destroysubscriber');
 
 
 
-Route::get('/test', [AdminController::class, 'test'])->name('test');
-//Route::post('/tinymce-upload', [AdminController::class, 'uploadImage'])->name('tinymce.upload');
+
 Route::post('/tinymce-upload', [AdminController::class, 'upload'])->name('tinymce.upload');
 
+
+// contact admin part
+Route::get('/admin/contacts/new-count', [App\Http\Controllers\ContactController::class, 'newCount'])->middleware('auth')->name('contacts.new-count');
+    Route::get('/admin/contacts', [App\Http\Controllers\ContactController::class, 'index'])->name('contacts.index');
+    Route::post('/admin/contacts/{contact}/read', [ContactController::class, 'markAsRead'])->name('contacts.read');
+
+
+
+
+});
+
+
+
+
+Route::post('/subscribe', [SubscriberController::class, 'subscribe'])->name('subscribe');
+
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('store.comment');
+
+Route::post('/comments/{comment}/react', [CommentController::class, 'react'])->name('comments.react');
+
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit'); 
+
+Route::get('/policy', [PagesController::class, 'policy'])->name('policy');
+Route::get('/staffer', [PagesController::class, 'staffer'])->name('staffer');
+
+
+
+
+
+
+Route::get('/lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'ar', 'fr'])) {
+        session(['locale' => $locale]);
+        app()->setLocale($locale);
+    }
+    return redirect()->back();
+})->name('lang.switch');
 
 
 

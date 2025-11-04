@@ -62,8 +62,8 @@ class PagesController extends Controller
 
         $tabPosts = [];
 
-        foreach ($tabs as $tab => $subcategorySlug) {
-            $subcategory = SubCategory::where('slug', $subcategorySlug)->first();
+        foreach ($tabs as $tab => $subcategoryname) {
+            $subcategory = SubCategory::where('name', $subcategoryname)->first();
 
             if ($subcategory) {
                 // ✅ All posts for the grid
@@ -136,7 +136,7 @@ class PagesController extends Controller
 
     public function shahid() {
 
-            $category = Category::where('slug', 'shahid')->firstOrFail();
+            $category = Category::where('name', 'shahid')->firstOrFail();
 
             // Get subcategories that have posts under this category
 
@@ -163,7 +163,7 @@ class PagesController extends Controller
                     ->take(10)
                     ->get();
 
-                $subCategoriesData[$subCategory->slug] = [
+                $subCategoriesData[$subCategory->name] = [
                     'subCategory' => $subCategory,
                     'allPosts'    => $allPosts,
                     'topPosts'    => $topPosts,
@@ -190,8 +190,8 @@ class PagesController extends Controller
 
 $tabPosts = [];
 
-foreach ($tabs as $tab => $subcategorySlug) {
-    $subcategory = SubCategory::where('slug', $subcategorySlug)->first();
+foreach ($tabs as $tab => $subcategoryname) {
+    $subcategory = SubCategory::where('name', $subcategoryname)->first();
 
     if ($subcategory) {
         // 🔹 All posts for this subcategory in category = ainews
@@ -200,7 +200,7 @@ foreach ($tabs as $tab => $subcategorySlug) {
                 $q->where('sub_categories.id', $subcategory->id);
             })
             ->whereHas('categories', function ($q) {
-                $q->where('categories.slug', 'ainews');
+                $q->where('categories.name', 'ainews');
             })
             ->latest()
             ->get();
@@ -211,7 +211,7 @@ foreach ($tabs as $tab => $subcategorySlug) {
                 $q->where('sub_categories.id', $subcategory->id);
             })
             ->whereHas('categories', function ($q) {
-                $q->where('categories.slug', 'ainews');
+                $q->where('categories.name', 'ainews');
             })
             ->latest()
             ->take(10)
@@ -224,7 +224,7 @@ foreach ($tabs as $tab => $subcategorySlug) {
                 $q->where('sub_categories.id', $subcategory->id);
             })
             ->whereHas('categories', function ($q) {
-                $q->where('categories.slug', 'ainews');
+                $q->where('categories.name', 'ainews');
             })
             ->orderByDesc('views_count')
             ->take(10)
@@ -250,10 +250,10 @@ return view('pages.ai.ai', compact('tabPosts'));
               $subcategories = ['famous', 'life', 'moroccan', 'health'];
     $data = [];
 
-    foreach ($subcategories as $slug) {
-        $data[$slug] = Post::with('media')
-            ->whereHas('subcategories', function ($q) use ($slug) {
-                $q->where('sub_categories.slug', $slug);
+    foreach ($subcategories as $name) {
+        $data[$name] = Post::with('media')
+            ->whereHas('subcategories', function ($q) use ($name) {
+                $q->where('sub_categories.name', $name);
             })
             ->latest()
             ->get();
@@ -262,46 +262,6 @@ return view('pages.ai.ai', compact('tabPosts'));
     return view('pages.amusing.amusing', compact('data'));
     }
 
-
-
-
-/* public function article($slug)
-{
-    $post = Post::with('media', 'tags', 'categories')
-        ->where('slug', $slug)
-        ->firstOrFail();
-
-    // previous posts (image type)
-    $previousImages = Post::with('media')
-        ->whereHas('media', function ($q) {
-            $q->where('type', 'image');
-        })
-        ->where('id', '<', $post->id)
-        ->latest()
-        ->take(10)
-        ->get();
-
-    // previous posts (video type)
-    $previousVideos = Post::with('media')
-        ->whereHas('media', function ($q) {
-            $q->whereIn('type', ['videotube', 'aivideo']);
-        })
-        ->where('id', '<', $post->id)
-        ->latest()
-        ->take(10)
-        ->get();
-
-    // related posts (same tags)
-    $relatedPosts = Post::with('media')
-        ->whereHas('tags', function ($q) use ($post) {
-            $q->whereIn('tags.id', $post->tags->pluck('id'));
-        })
-        ->where('id', '!=', $post->id)
-        ->take(8)
-        ->get();
-
-    return view('pages.post', compact('post', 'previousImages', 'previousVideos', 'relatedPosts'));
-} */
 
 
     public function article($slug)
@@ -338,6 +298,7 @@ return view('pages.ai.ai', compact('tabPosts'));
         ->take(10)
         ->get();
 
+
     // previous posts (video type)
     $previousVideos = Post::with('media')
         ->whereHas('media', fn($q) => $q->whereIn('type', ['videotube', 'aivideo']))
@@ -345,6 +306,7 @@ return view('pages.ai.ai', compact('tabPosts'));
         ->latest()
         ->take(10)
         ->get();
+
 
     // related posts (same tags)
     $relatedPosts = Post::with('media')
@@ -369,6 +331,27 @@ return view('pages.ai.ai', compact('tabPosts'));
     }
 
 
+       
 
+            public function policy()
+{
+    $locale = app()->getLocale();
+    $privacy = json_decode(file_get_contents(resource_path('lang/privacy.json')), true);
+    $content = $privacy[$locale];
+    
+    return view('pages.policy', compact('content'));
+}
+
+       
+
+         public function staffer() {
+
+           
+            $locale = app()->getLocale();
+    $editorial = json_decode(file_get_contents(resource_path('lang/staffer.json')), true);
+    $content = $editorial[$locale];
+    
+    return view('pages.staffer', compact('content'));
+        }
         
     }

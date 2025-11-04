@@ -1,16 +1,18 @@
-.dk-footer {
+.dk-footer { 
     padding: 20px 0 0;
     background-color: #151414;
     position: relative;
     z-index: 2;
-    border-top: 0.25px solid #C0C0BC; /* thin white border */
-    margin-top: 1.5rem; /* spacing above footer */
+    border-top: 0.25px solid #C0C0BC;
+    margin-top: 1.5rem;
 }
+
 .dk-footer .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
+    text-align: right; /* default for desktop */
 }
 
 .dk-footer-box-info {
@@ -19,6 +21,7 @@
 
 .dk-footer-box-info ul {
     display: flex;
+    flex-wrap: nowrap; /* force single row */
     gap: 10px;
     padding: 0;
     margin: 0;
@@ -39,26 +42,119 @@
 }
 
 .dk-footer-box-info ul li a:hover {
-    background: #fff;
+    background: #fbc550;
     color: #111;
 }
 
 /* Subscribe input + button inline */
+.dk-footer-form {
+    display: flex;
+    flex-wrap: nowrap; /* force input + button on same row */
+    gap: 0.5rem;
+}
+
 .dk-footer-form input {
     flex: 1;
     padding: 10px;
+    min-width: 0; /* prevent input from overflowing */
 }
 
 .dk-footer-form button {
     padding: 10px 15px;
     border: none;
-    background: #fff;
-    color: #111;
+    background: #fbc550;
+    color: #000;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .dk-footer-form button:hover {
-    background: #555;
+    background: #e0a800;
+    color: #111;
+}
+
+/* Second column links */
+.dk-footer .col-lg-3 ul {
+    list-style-position: inside; /* bullets inside, aligned with text */
+    padding-right: 0;
+    margin: 0;
+}
+
+.dk-footer .col-lg-3 ul li {
+    margin-bottom: 0.5rem;
+    text-align: right; /* bullets on right side for RTL */
+}
+
+.dk-footer .col-lg-3 ul li a {
     color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+/* Back to top button */
+#back-to-top button {
+    background-color: #fbc550;
+    color: #000;
+}
+
+ .dk-footer .copyright {
+        text-align: center !important;
+        width: 100%;
+    }
+
+/* Responsive: center all content on small devices */
+@media (max-width: 991px) {
+    .dk-footer .container {
+        flex-direction: column;
+        align-items: center !important; /* override align-items-start on mobile */
+        text-align: center;
+
+    
+    }
+
+    .dk-footer .col-lg-3,
+    .dk-footer .col-lg-5 {
+        margin-bottom: 1.5rem;
+        text-align: center; /* center all columns */
+    }
+
+    /* Center second column links */
+    .dk-footer .col-lg-3 ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        list-style-position: inside;
+        text-align: center;
+    }
+
+    /* Social buttons forced in one row */
+    .dk-footer-box-info ul {
+        flex-direction: row !important;
+        justify-content: center;
+    }
+
+    /* Subscribe form: full width and centered */
+    .dk-footer-form {
+        flex-direction: row !important;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+    }
+
+    .dk-footer-form input {
+        width: 80%; /* full width minus button space */
+        max-width: 400px;
+    }
+
+    .dk-footer-form button {
+        width: auto;
+        flex-shrink: 0;
+    }
+
+    /* Center copyright */
+    .dk-footer .copyright {
+        text-align: center !important;
+        width: 100%;
+    }
 }

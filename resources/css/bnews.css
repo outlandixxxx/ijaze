@@ -51,7 +51,12 @@
 .card-img-overlay {
     background: rgba(0, 0, 0, 0.4);
     transition: background 0.3s ease;
-    text-align: right; /* align text to the right */
+     display: flex;
+  align-items: flex-start;   /* aligns content to bottom vertically */
+   flex-direction: column;
+  justify-content: end; /* optional: center horizontally */
+ 
+    padding: 1rem;
 }
 
 /* Optional: align inner flex items to the end */
@@ -304,7 +309,6 @@ a.news-link:hover {
 /* Shahid */
 
 .custom-section {
-    border: 1px solid #ccc;            /* إطار رمادي */
     box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* ظل خفيف */
     border-radius: 8px;                /* زوايا ناعمة */
              /* خلفية بيضاء */
@@ -317,8 +321,496 @@ a.news-link:hover {
     height: auto;
 }
 
+#tv {
+  position: relative;
+  display: inline-block; /* shrink to title width */
+  padding: 10px 20px;
+  background: #1A2A9F; /* main color */
+  color: #fcb550; /* text color */
+  border-radius: 50% / 10%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin: 10px 0;
+  transition: all 0.3s ease; /* smooth resizing */
+}
+
+#tv::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: -5%;
+  right: -5%;
+  background: inherit;
+  border-radius: 5% / 50%;
+  z-index: -1; /* put behind the text */
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 768px) {
+  #tv {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  #tv {
+    font-size: 1rem;
+    padding: 8px 15px;
+  }
+}
+
+/*second title */
+
+#second-title {
+  position: relative;
+  display: inline-block;
+  background: #fcb550; /* main color */
+  color: #000000;      /* text color */
+  padding: 5px 20px;
+  font-weight: 600;     /* lighter than bold */
+  font-size: 1.2rem;    /* smaller text */
+  transform: skew(18deg); /* shape the background */
+  margin: 20px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Fix text skew so it stays straight */
+#second-title span {
+  display: inline-block;
+  transform: skew(-18deg);
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 768px) {
+  #second-title {
+    font-size: 1.2rem;
+    padding: 12px 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  #second-title {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+
+/*third title */
+
+#third-title {
+  position: relative;
+  display: inline-block;
+  background: #fcb550; /* main color */
+  color: #000000;      /* text color */
+  padding: 5px 20px;
+  font-weight: 600;     /* lighter than bold */
+  font-size: 1.2rem;    /* smaller text */
+  transform: skew(0deg); /* shape the background */
+  margin: 20px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Fix text skew so it stays straight */
+#third-title span {
+  display: inline-block;
+  transform: skew(0deg);
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 768px) {
+  #third-title {
+    font-size: 1.2rem;
+    padding: 12px 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  #third-title {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+
+
+/*index title*/
+
+
+#index-title {
+  font-family: "Cairo", sans-serif;
+  position: relative;
+  display: inline-block;
+  background: #000000; /* main color */
+  border-inline-start: solid 8px #FBC550; /* Automatically flips for RTL/LTR */
+  border-color: #FBC550;
+  color: #ffffff;      /* text color */
+  padding: 5px 20px;
+  font-weight: 650;     /* lighter than bold */
+  font-size: 1.5rem;    /* smaller text */
+  line-height: 1.8rem;
+  margin: 20px 0;
+   transform: scaleY(1.2); /* 1.2 = 20% taller */
+}
+
+/* Fix text skew so it stays straight */
+#index-title span {
+  display: inline-block;
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 768px) {
+  #index-title {
+    font-size: 1.2rem;
+    padding: 12px 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  #index-title {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
 
 
 
 
-  
+
+/*post title*/
+
+
+#post-title {
+  font-family: "Cairo", sans-serif;
+  position: relative;
+  display: inline-block;
+  background: #000000; /* main color */
+  border-inline-start: solid 8px #FBC550; /* Automatically flips for RTL/LTR */
+  border-color: #FBC550;
+  color: #ffffff;      /* text color */
+  padding: 5px 20px;
+  font-weight: 500;     /* lighter than bold */
+  font-size: 1.4rem;    /* smaller text */
+  line-height: 1.8rem;
+  margin: 20px 0;
+   transform: scaleY(1.2); /* 1.2 = 20% taller */
+}
+
+/* Fix text skew so it stays straight */
+#post-title span {
+  display: inline-block;
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 768px) {
+  #post-title {
+    font-size: 1.2rem;
+    padding: 12px 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  #post-title {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+
+
+/*post meta */
+
+.post-meta {
+  display: flex;
+  justify-content: space-between; /* left + right separation */
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* Left (comments) */
+.meta-left {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #919197;
+  font-weight: 500;
+}
+
+/* Right (author + date) */
+.meta-right {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* spacing between author and date */
+}
+
+.meta-right span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.post-meta i {
+  color: #fcb550; /* icon color */
+  font-size: 0.95rem;
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 600px) {
+  .post-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .meta-right {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}
+
+
+/*comments section */
+
+.comment-section {
+  margin-top: 60px;
+  padding: 40px;
+  background: transparent;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: right;
+}
+
+.comment-title {
+  color: #fcb550;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.comment-note {
+  background: #fffae6;
+  color: #555;
+  border-right: 5px solid #fbc550;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+   text-align: right;
+}
+
+.single-comment {
+  background: black;
+  padding: 12px 15px;
+   text-align: right;
+   margin-top: 10px;
+}
+
+.comment-form label {
+  color: #ffffff;
+  font-weight: 500;
+  margin-bottom: 5px;
+   text-align: right;
+}
+
+.comment-form .form-control {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease;
+   text-align: right;
+}
+
+.comment-form .form-control:focus {
+  border-color: #bc9e27;
+  outline: none;
+   text-align: right;
+}
+
+.btn-comment {
+  background-color: #2b3bc4;
+  color: #ffdc91;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-comment:hover {
+  background-color: #2b3bc4;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .comment-section {
+    padding: 20px;
+  }
+  .comment-title {
+    font-size: 1.2rem;
+  }
+}
+
+/*comments reactions */
+
+.comment-reactions .btn {
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+}
+
+.comment-reactions i {
+  font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .comment-reactions {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+
+/* Mobile carousel adjustments */
+@media (max-width: 767px) {
+    .carousel-control-prev i,
+    .carousel-control-next i {
+        font-size: 2.5rem !important;
+    }
+    
+    .carousel-control-prev {
+        left: 5px;
+    }
+    
+    .carousel-control-next {
+        right: 5px;
+    }
+}
+
+@media (max-width: 575px) {
+    .carousel-control-prev i,
+    .carousel-control-next i {
+        font-size: 2rem !important;
+    }
+}
+
+
+/* ========================================
+   CAROUSEL MOBILE FIXES
+   ======================================== */
+
+@media (max-width: 767px) {
+    
+    /* ===== FIX CAROUSEL BUTTONS - CENTER VERTICALLY ===== */
+    
+    /* For regular carousel (index section) */
+    #carouselExampleCaptions .carousel-control-prev,
+    #carouselExampleCaptions .carousel-control-next {
+        top: 50%;
+        transform: translateY(-50%);
+        height: auto;
+    }
+    
+    /* For amusing carousel - needs special positioning due to custom-card height */
+    #carouselvideos .carousel-control-prev,
+    #carouselvideos .carousel-control-next {
+        top: 50%;
+        transform: translateY(-50%);
+        height: auto;
+        margin-top: 0 !important;
+    }
+    
+    /* Ensure custom-card has consistent height for button centering */
+    #carouselvideos .custom-card {
+        min-height: 400px;
+        max-height: 500px;
+    }
+    
+    #carouselvideos .custom-card-img {
+        min-height: 400px;
+        max-height: 500px;
+    }
+    
+    /* Smaller button icons */
+    .carousel-control-prev i,
+    .carousel-control-next i {
+        font-size: 2.5rem !important;
+    }
+    
+    .carousel-control-prev {
+        left: 5px;
+    }
+    
+    .carousel-control-next {
+        right: 5px;
+    }
+    
+    /* ===== REDUCE SPACING AT BOTTOM OF ALL SECTIONS ===== */
+    
+    /* Reduce padding in carousel containers */
+    #carouselExampleCaptions .container,
+    #carouselvideos .container {
+        padding-bottom: 0.5rem !important;
+        padding-top: 1rem !important;
+    }
+    
+    /* Remove extra margins */
+    #carouselExampleCaptions .row,
+    #carouselvideos .row {
+        margin-bottom: 0 !important;
+    }
+    
+    /* Reduce section spacing */
+    section#index,
+    section#amusing {
+        padding-bottom: 1rem;
+    }
+    
+   
+    
+    /* Reduce "Discover More" button container padding */
+    .p-3 {
+        padding: 0.5rem !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .carousel-control-prev i,
+    .carousel-control-next i {
+        font-size: 2rem !important;
+    }
+    
+    /* Even less padding on very small screens */
+    #carouselExampleCaptions .container,
+    #carouselvideos .container {
+        padding-bottom: 0.25rem !important;
+        padding-top: 0.5rem !important;
+    }
+    
+    /* Tighter sections */
+    section.content-section {
+        margin-bottom: 1rem !important;
+    }
+    
+    #carouselvideos .custom-card,
+    #carouselvideos .custom-card-img {
+        min-height: 350px;
+        max-height: 450px;
+    }
+}
+
+.content-section  {
+
+      margin-top: 40px;
+
+} 
+
