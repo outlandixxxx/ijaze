@@ -142,12 +142,6 @@
 
 <!-- TinyMCE -->
 
-
-
-
-
-
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     // Media toggle
@@ -169,8 +163,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Categories dynamic
     const wrapper = document.getElementById('category-wrapper');
+    const addCategoryBtn = document.getElementById('add-category');
     let index = wrapper.children.length;
-    document.getElementById('add-category').addEventListener('click', function() {
+    
+    // Function to check and disable button if category exists
+    function checkCategoryLimit() {
+        if (wrapper.children.length >= 1) {
+            addCategoryBtn.disabled = true;
+            addCategoryBtn.classList.add('disabled');
+        } else {
+            addCategoryBtn.disabled = false;
+            addCategoryBtn.classList.remove('disabled');
+        }
+    }
+    
+    // Check on page load
+    checkCategoryLimit();
+    
+    addCategoryBtn.addEventListener('click', function() {
         const row = document.createElement('div');
         row.classList.add('row', 'mb-2', 'category-row');
         row.innerHTML = `
@@ -195,13 +205,19 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
         wrapper.appendChild(row);
         index++;
+        
+        // Disable button after adding
+        checkCategoryLimit();
     });
 
     wrapper.addEventListener('click', function(e) {
         if(e.target.classList.contains('remove-category')) {
             e.target.closest('.category-row').remove();
+            // Re-enable button after removing
+            checkCategoryLimit();
         }
     });
 });
 </script>
+
 @endsection

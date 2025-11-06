@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-11">
+    <div class="container mt-11" data-copy-success-message="{{ __('Link copied!') }}">
         <div class="row">
 
             @if(app()->getLocale() == 'ar')
@@ -254,7 +254,7 @@
                     </div>
                 </div>
 
-                <!-- Main Content - MIDDLE (same as RTL, repeated) -->
+                <!-- Main Content - MIDDLE -->
                 <div class="col-12 col-md-8 order-1 order-md-2">
                     
                     <div id="post-title">
@@ -463,59 +463,4 @@
 
         </div>
     </div>
-
-    <script>
-        // Copy link function
-        function copyPageLink() {
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                alert("{{ __('Link copied!') }}");
-            });
-        }
-
-        // Comment reactions
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.react-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const commentId = this.dataset.id;
-                    const reaction = this.dataset.reaction;
-
-                    const likeSpan = document.getElementById(`likes-${commentId}`);
-                    const dislikeSpan = document.getElementById(`dislikes-${commentId}`);
-                    if (!likeSpan || !dislikeSpan) return;
-
-                    fetch(`/comments/${commentId}/react`, {
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ reaction })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            likeSpan.textContent = data.likes;
-                            dislikeSpan.textContent = data.dislikes;
-
-                            const parent = this.closest('.comment-reactions');
-                            parent.querySelectorAll('.react-btn').forEach(btn => {
-                                btn.classList.remove('btn-primary', 'btn-danger');
-                                btn.classList.add(btn.dataset.reaction === 'like' ? 'btn-outline-primary' : 'btn-outline-danger');
-                            });
-
-                            if (data.status === 'added') {
-                                if (reaction === 'like') {
-                                    this.classList.remove('btn-outline-primary');
-                                    this.classList.add('btn-primary');
-                                } else {
-                                    this.classList.remove('btn-outline-danger');
-                                    this.classList.add('btn-danger');
-                                }
-                            }
-                        })
-                        .catch(console.error);
-                });
-            });
-        });
-    </script>
-
 @endsection

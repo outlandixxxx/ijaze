@@ -40,7 +40,12 @@
                                     <div id="contactAlert" class="alert d-none text-center" role="alert"></div>
 
                                     <!-- Contact Form -->
-                                    <form id="contactForm" method="post">
+                                    <form id="contactForm" 
+                                          method="post"
+                                          data-recaptcha-key="{{ config('services.recaptcha.key') }}"
+                                          data-submit-route="{{ route('contact.submit') }}"
+                                          data-error-message="{{ __('An error occurred while sending the message.') }}"
+                                          data-connection-error="{{ __('A connection error occurred with the server.') }}">
                                         <div class="row justify-content-end">
                                             
                                             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -99,55 +104,3 @@
 {{-- Load Google reCAPTCHA v3 --}}
 <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.key') }}"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const contactForm = document.getElementById('contactForm');
-        const contactAlert = document.getElementById('contactAlert');
-
-        if (contactForm && contactAlert) {
-            contactForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-
-                contactAlert.classList.add('d-none');
-
-                try {
-                    await grecaptcha.ready(async function() {
-                        const token = await grecaptcha.execute('{{ config('services.recaptcha.key') }}', {action: 'contact'});
-                        
-                        document.getElementById('contact_recaptcha_token').value = token;
-
-                        const formData = new FormData(contactForm);
-
-                        const response = await fetch("{{ route('contact.submit') }}", {
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                            },
-                            body: formData
-                        });
-
-                        const data = await response.json();
-
-                        if (data.status === 'success') {
-                            contactAlert.className = 'alert alert-success mt-3 text-center';
-                            contactAlert.textContent = data.message;
-                            contactForm.reset();
-                        } else {
-                            contactAlert.className = 'alert alert-danger mt-3 text-center';
-                            contactAlert.textContent = data.message || "{{ __('An error occurred while sending the message.') }}";
-                        }
-
-                        contactAlert.classList.remove('d-none');
-                    });
-                } catch (error) {
-                    console.error('Error:', error);
-                    contactAlert.className = 'alert alert-danger mt-3 text-center';
-                    contactAlert.textContent = "{{ __('A connection error occurred with the server.') }}";
-                    contactAlert.classList.remove('d-none');
-                }
-            });
-        } else {
-            console.error('contactForm or contactAlert not found in the DOM.');
-        }
-    });
-</script>

@@ -5,7 +5,10 @@
     <div class="card p-4 shadow" style="min-width: 350px; max-width: 400px; width: 100%;">
         <h3 class="text-center mb-4">تسجيل الدخول</h3>
 
-        <form id="login-form" method="POST" action="{{ route('login.post') }}">
+        <form id="login-form" 
+              method="POST" 
+              action="{{ route('login.post') }}"
+              data-recaptcha-key="{{ config('services.recaptcha.key') }}">
             @csrf
 
             <div class="mb-3">
@@ -39,25 +42,6 @@
 {{-- Load Google reCAPTCHA v3 --}}
 <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.key') }}"></script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('login-form');
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        grecaptcha.ready(function() {
-            grecaptcha.execute('{{ config('services.recaptcha.key') }}', {action: 'login'})
-            .then(function(token) {
-                document.getElementById('recaptcha_token').value = token;
-                form.submit();
-            })
-            .catch(function(err) {
-                console.error("⚠️ reCAPTCHA execution failed:", err);
-                alert("Google reCAPTCHA could not run. Please reload and try again.");
-            });
-        });
-    });
-});
-</script>
+{{-- Load your bundled JavaScript --}}
+@vite('resources/js/app.js')
 @endsection

@@ -1,20 +1,46 @@
-//import Alpine from 'alpinejs';
 // resources/js/app.js
 
-//import 'bootstrap';
-import * as bootstrap from 'bootstrap';   // correct way
-
-//import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import * as bootstrap from 'bootstrap';
 import './back-to-top.js';
 import './bnews.js';
 import './customtabs.js';
 
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
+import { initRecaptchaLogin } from './recaptcha-login.js';
+import { initVideoModal } from './video-modal.js';
+import { initCommentReactions } from './comment-reactions.js';
+import { initCopyLink } from './copy-link.js';
+import { initContactForm } from './contact-form.js';
+import { initNavbarActive } from './navbar-active.js';
+import { initSubscribeForm } from './subscribe-form.js';
 
-// Initialize swiper for cards
+
+
+// Initialize all components when DOM is ready
 document.addEventListener("DOMContentLoaded", function () {
+    
+    // Initialize reCAPTCHA login form
+    initRecaptchaLogin();
+    
+    // Initialize video modal
+    initVideoModal();
+    
+    // Initialize comment reactions
+    initCommentReactions();
+    
+    // Initialize copy link functionality
+    initCopyLink();
+    
+    // Initialize contact form
+    initContactForm();
+    
+    // Initialize navbar active links
+    initNavbarActive();
+     // Initialize subscribe form
+    initSubscribeForm();
 
+    // Initialize Swiper carousels
     new Swiper(".cardSwiper", {
         slidesPerView: 5,
         spaceBetween: 20,

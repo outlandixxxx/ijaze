@@ -12,7 +12,11 @@
                         <span class="animate-border border-black"></span>
                     </div>
                     <p>{{ __('Receive our latest updates and offers by subscribing') }}</p>
-                    <form id="subscribe-form" class="dk-footer-form d-flex flex-column flex-sm-row gap-2">
+                    <form id="subscribe-form" 
+                          class="dk-footer-form d-flex flex-column flex-sm-row gap-2"
+                          data-submit-route="{{ route('subscribe') }}"
+                          data-success-message="{{ __('Successfully subscribed!') }}"
+                          data-error-message="{{ __('An error occurred. Please try again.') }}">
                         @csrf
                         <input type="email" name="email" class="form-control" placeholder="{{ __('Email Address') }}" required>
                         <button type="submit" class="btn" style="background-color:#fbc550; color:#000;">
@@ -74,7 +78,11 @@
                         <span class="animate-border border-black"></span>
                     </div>
                     <p>{{ __('Receive our latest updates and offers by subscribing') }}</p>
-                    <form id="subscribe-form" class="dk-footer-form d-flex flex-column flex-sm-row gap-2">
+                    <form id="subscribe-form" 
+                          class="dk-footer-form d-flex flex-column flex-sm-row gap-2"
+                          data-submit-route="{{ route('subscribe') }}"
+                          data-success-message="{{ __('Successfully subscribed!') }}"
+                          data-error-message="{{ __('An error occurred. Please try again.') }}">
                         @csrf
                         <input type="email" name="email" class="form-control" placeholder="{{ __('Email Address') }}" required>
                         <button type="submit" class="btn" style="background-color:#fbc550; color:#000;">
@@ -101,20 +109,3 @@
     </div>
 </footer>
 
-<script>
-document.getElementById('subscribe-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    let formData = new FormData(this);
-    fetch('{{ route('subscribe') }}', { method: 'POST', body: formData })
-        .then(res => res.json())
-        .then(data => {
-            const msgDiv = document.getElementById('subscribe-message');
-            if (data.success) {
-                msgDiv.innerHTML = `<p class="text-success">${data.success}</p>`;
-            } else if (data.errors) {
-                msgDiv.innerHTML = `<p class="text-danger">${data.errors.email}</p>`;
-            }
-        })
-        .catch(err => console.error(err));
-});
-</script>

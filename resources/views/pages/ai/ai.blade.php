@@ -31,30 +31,23 @@
 
                     <div class="container-fluid px-4 mb-5">
                          <div id="third-title">
-                            <span> {{ __('Latest News') }}
-                            </span>
+                            <span> {{ __('Latest News') }}</span>
                         </div>
                         
-                        {{-- Carousel: last 10 posts --}}
                         @include('pages.components.swippervideo', ['posts' => $postsData['top']])
                     </div>
 
                     <div class="container-fluid px-4 mb-5">
-
                          <div id="third-title">
-                            <span> {{ __('Most Viewed') }}
-                            </span>
+                            <span> {{ __('Most Viewed') }}</span>
                         </div>
                         
-                        {{-- Top 10 by views --}}
                         @include('pages.components.swippervideo', ['posts' => $postsData['top']])
                     </div>
 
-                    {{-- All articles --}}
                     <div class="container-fluid px-4">
                         <div id="third-title">
-                            <span> {{ __('All Articles') }}
-                            </span>
+                            <span> {{ __('All Articles') }}</span>
                         </div>
                         <div class="row p-4">
                             <div class="col-sm-12">
@@ -87,7 +80,6 @@
 
                                         </div>
 
-                                        {{-- Load more button --}}
                                         <div class="text-center mt-3">
                                             <button class="btn btn-dark px-4 show-more-btn">{{ __('Show More') }}</button>
                                         </div>
@@ -114,27 +106,6 @@
             </div>
         </div>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const videoModal = document.getElementById('videoModal');
-                const videoFrame = document.getElementById('videoFrame');
-
-                document.querySelectorAll('.video-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const videoUrl = card.getAttribute('data-video');
-                        if (videoUrl) {
-                            const autoplayUrl = videoUrl.includes('?') ?
-                                videoUrl + '&autoplay=1' :
-                                videoUrl + '?autoplay=1';
-                            videoFrame.src = autoplayUrl;
-                        }
-                    });
-                });
-
-                videoModal.addEventListener('hidden.bs.modal', () => {
-                    videoFrame.src = "";
-                });
-            });
-        </script>
+        {{-- Inline script removed - now handled in video-modal.js --}}
     </div>
 @endsection
